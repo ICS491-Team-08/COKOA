@@ -14,11 +14,6 @@ import { Accounts } from "meteor/accounts-base";
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
-const genderOptions = [
-  { key: "m", text: "Male", value: "male" },
-  { key: "f", text: "Female", value: "female" },
-  { key: "o", text: "Other", value: "other" },
-];
 
 class Signup extends React.Component {
   /* Initialize state fields. */
@@ -29,14 +24,18 @@ class Signup extends React.Component {
       password: "",
       error: "",
       redirectToReferer: false,
+      vaccinated: false,
     };
   }
 
   /* Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
+    console.log(name);
     this.setState({ [name]: value });
   };
-
+  genderOnChange =(e) =>{
+    console.log(e.target.value)
+  }
   componentDidUpdate() {
     console.log(this.state);
   }
@@ -55,7 +54,6 @@ class Signup extends React.Component {
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
-    const { value } = this.state;
     const { from } = this.props.location.state || {
       from: { pathname: "/add" },
     };
@@ -100,7 +98,7 @@ class Signup extends React.Component {
                   onChange={this.handleChange}
                 />
                 <Form.Group widths="equal">
-                  <Form.Field label="Gender" control="select">
+                  <Form.Field label="Gender" control="select" onChange={this.genderOnChange}>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </Form.Field>
@@ -109,29 +107,31 @@ class Signup extends React.Component {
                   <label>Are you vaccinated?</label>
                   <Form.Radio
                     label="Yes"
-                    value="sm"
-                    checked={value === "sm"}
+                    value={true}
+                    name="vaccinated"
+                    checked={this.state.vaccinated}
                     onChange={this.handleChange}
                   />
                   <Form.Radio
                     label="No"
-                    value="md"
-                    checked={value === "md"}
+                    value={false}
+                    name="vaccinated"
+                    checked={!this.state.vaccinated}
                     onChange={this.handleChange}
                   />
                 </Form.Group>
                 <Form.Input
-                  label="what kind of vaccine did you recieve? (optional)"
+                  label="what type of vaccine did you recieve? (optional)"
                   id="signup-form-password"
-                  name="password"
-                  placeholder="Password"
+                  name="vaccineType"
+                  placeholder="e.g. Pfizer, Moderna, Johnson and Johnson"
                   onChange={this.handleChange}
                 />
                 <Form.Input
                   label="What is the lot number (optional)"
                   id="signup-form-password"
-                  name="password"
-                  placeholder="Password"
+                  name="lotNumber"
+                  placeholder="1001-101"
                   onChange={this.handleChange}
                 />
                 <Form.Button id="signup-form-submit" content="Submit" />
