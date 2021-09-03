@@ -10,6 +10,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import { Accounts } from "meteor/accounts-base";
+import { Info } from "../../api/stuff/Stuff";
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -22,6 +23,11 @@ class Signup extends React.Component {
     this.state = {
       email: "",
       password: "",
+      name: "",
+      gender: "Male",
+      vaccinated: false,
+      vaccineType: "",
+      vaccineLot: "",
       error: "",
       redirectToReferer: false,
       vaccinated: false,
@@ -43,11 +49,20 @@ class Signup extends React.Component {
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { email, password } = this.state;
+    const{ name, gender, vaccinated, vaccineType, vaccineLot} = this.state;
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
         this.setState({ error: "", redirectToReferer: true });
+      }
+    });
+    Info.collection.insert({ name, gender, vaccinated, vaccineType, vaccineLot, owner: email }, (error) => {
+      if (error) {
+        swal("Error", error.message, "error");
+      } else {
+        swal("Success", "Item added successfully", "success");
+        // formRef.reset();
       }
     });
   };
@@ -103,7 +118,7 @@ class Signup extends React.Component {
                     <option value="female">Female</option>
                   </Form.Field>
                 </Form.Group>
-                <Form.Group inline>
+                <Form.Group inline="true">
                   <label>Are you vaccinated?</label>
                   <Form.Radio
                     label="Yes"
@@ -130,7 +145,7 @@ class Signup extends React.Component {
                 <Form.Input
                   label="What is the lot number (optional)"
                   id="signup-form-password"
-                  name="lotNumber"
+                  name="vaccineLot"
                   placeholder="1001-101"
                   onChange={this.handleChange}
                 />
