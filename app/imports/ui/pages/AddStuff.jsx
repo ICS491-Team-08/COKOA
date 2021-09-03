@@ -19,7 +19,7 @@ import { Stuffs } from "../../api/stuff/Stuff";
 const formSchema = new SimpleSchema({
   name: String,
   quantity: Number,
-  yesorno: Boolean,
+  // yesorno: Boolean,
   condition: {
     type: String,
     allowedValues: ["excellent", "good", "fair", "poor"],
@@ -63,7 +63,7 @@ class AddStuff extends React.Component {
           >
             <Segment>
               <TextField name="name" />
-              <RadioField label="do you feel any symptoms of COVID-19" name="yesorno" allowedValues={["Yes", "No"]} inline/>
+              {/* <RadioField label="do you feel any symptoms of COVID-19" name="yesorno" allowedValues={["Yes", "No"]} inline/> */}
               <NumField name="quantity" decimal={false} />
               <SelectField name="condition" />
               <SubmitField value="Submit" />

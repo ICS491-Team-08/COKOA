@@ -29,7 +29,7 @@ class StuffsCollection {
     this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
-class infoCollection {
+class InfoCollection {
   constructor() {
     // The name of this collection.
     this.name = 'InfoCollection';
@@ -60,4 +60,4 @@ class infoCollection {
  * @type {StuffsCollection}
  */
 export const Stuffs = new StuffsCollection();
-export const Info = new infoCollection();
+export const Info = new InfoCollection();

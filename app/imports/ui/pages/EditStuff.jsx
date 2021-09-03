@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { Stuffs } from '../../api/stuff/Stuff';
+import { Stuffs, Info } from '../../api/stuff/Stuff';
 
 const bridge = new SimpleSchema2Bridge(Stuffs.schema);
 
@@ -24,6 +24,10 @@ class EditStuff extends React.Component {
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  componentDidUpdate(){
+    console.log(this.props.data);
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
@@ -53,6 +57,7 @@ EditStuff.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
+  data: PropTypes.object,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -61,12 +66,17 @@ export default withTracker(({ match }) => {
   const documentId = match.params._id;
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  const subscription2 = Meteor.subscribe(Info.userPublicationName);
+  // console.log(subscription2.ready());
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready();
   // Get the document
   const doc = Stuffs.collection.findOne(documentId);
+  const data = Info.collection.find({}).fetch();
+  // console.log(data);
   return {
     doc,
     ready,
+    data,
   };
 })(EditStuff);
