@@ -15,6 +15,12 @@ import { Stuffs, Info } from "../../api/stuff/Stuff";
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListStuff extends React.Component {
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
+
+  /* Initialize state fields. */
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return this.props.ready ? (
       this.renderPage()
@@ -22,11 +28,32 @@ class ListStuff extends React.Component {
       <Loader active>Getting data</Loader>
     );
   }
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
+  };
+  genderOnChange = (e) => {
+    this.setState({ gender: e.target.value });
+  };
 
+  componentDidMount() {
+    // console.log(this.props);
+  }
+
+  componentDidUpdate(prevProps) {
+    // console.log("this.state", this.props);
+    if (this.props.info && this.props.info._id !== prevProps.info?._id) {
+      console.log("hi");
+      this.setState({
+        name: this.props.info.name,
+        gender: this.props.info.gender,
+        vaccinated: this.props.info.vaccinated,
+        vaccineType: this.props.info.vaccineType,
+        vaccineLot: this.props.info.vaccineLot,
+      });
+    }
+  }
   // Render the page once subscriptions have been received.
   renderPage() {
-    console.log(this.props.info[0])
-    console.log(this.props.info.gender)
     return (
       <Container id="signup-page">
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
@@ -42,7 +69,7 @@ class ListStuff extends React.Component {
                   name="name"
                   placeholder="Your name"
                   onChange={this.handleChange}
-                  value={this.props.info[0].name}
+                  value={this.state?.name}
                   disabled
                 />
                 <Form.Group widths="equal">
@@ -50,26 +77,26 @@ class ListStuff extends React.Component {
                     label="Gender"
                     control="select"
                     onChange={this.genderOnChange}
-                    value={this.props.info[0].gender}
+                    value={this.state?.gender}
                   >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </Form.Field>
                 </Form.Group>
-                <Form.Group inline="true">
+                <Form.Group>
                   <label>Are you vaccinated?</label>
                   <Form.Radio
                     label="Yes"
                     value={true}
                     name="vaccinated"
-                    checked={this.props.info[0].vaccinated}
+                    checked={this.state?.vaccinated}
                     onChange={this.handleChange}
                   />
                   <Form.Radio
                     label="No"
                     value={false}
                     name="vaccinated"
-                    checked={!this.props.info[0].vaccinated}
+                    checked={!this.state?.vaccinated}
                     onChange={this.handleChange}
                   />
                 </Form.Group>
@@ -78,7 +105,7 @@ class ListStuff extends React.Component {
                   id="signup-form-password"
                   name="vaccineType"
                   placeholder="e.g. Pfizer, Moderna, Johnson and Johnson"
-                  value={this.props.info[0].vaccineType}
+                  value={this.state?.vaccineType}
                   onChange={this.handleChange}
                 />
                 <Form.Input
@@ -86,7 +113,7 @@ class ListStuff extends React.Component {
                   id="signup-form-password"
                   name="vaccineLot"
                   placeholder="1001-101"
-                  value={this.props.info[0].vaccineLot}
+                  value={this.state?.vaccineLot}
                   onChange={this.handleChange}
                 />
                 <Form.Button id="signup-form-submit" content="Submit" />
@@ -112,8 +139,7 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const info = Info.collection.find({}).fetch();
-  console.log(info)
+  const info = Info.collection.find({}).fetch()[0];
   return {
     info,
     ready,
