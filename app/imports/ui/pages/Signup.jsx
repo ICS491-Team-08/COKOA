@@ -24,7 +24,7 @@ class Signup extends React.Component {
       email: "",
       password: "",
       name: "",
-      gender: "Male",
+      gender: "male",
       vaccinated: false,
       vaccineType: "",
       vaccineLot: "",
@@ -36,12 +36,13 @@ class Signup extends React.Component {
 
   /* Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
-    console.log(name);
+    console.log(name, value);
     this.setState({ [name]: value });
   };
-  genderOnChange =(e) =>{
-    console.log(e.target.value)
-  }
+  genderOnChange = (e) => {
+    this.setState({ gender: e.target.value });
+    console.log(e.target.value);
+  };
   componentDidUpdate() {
     console.log(this.state);
   }
@@ -49,7 +50,7 @@ class Signup extends React.Component {
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { email, password } = this.state;
-    const{ name, gender, vaccinated, vaccineType, vaccineLot} = this.state;
+    const { name, gender, vaccinated, vaccineType, vaccineLot } = this.state;
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
@@ -57,14 +58,17 @@ class Signup extends React.Component {
         this.setState({ error: "", redirectToReferer: true });
       }
     });
-    Info.collection.insert({ name, gender, vaccinated, vaccineType, vaccineLot, owner: email }, (error) => {
-      if (error) {
-        swal("Error", error.message, "error");
-      } else {
-        swal("Success", "Item added successfully", "success");
-        // formRef.reset();
+    Info.collection.insert(
+      { name, gender, vaccinated, vaccineType, vaccineLot, owner: email },
+      (error) => {
+        if (error) {
+          swal("Error", error.message, "error");
+        } else {
+          swal("Success", "Item added successfully", "success");
+          // formRef.reset();
+        }
       }
-    });
+    );
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
@@ -113,7 +117,11 @@ class Signup extends React.Component {
                   onChange={this.handleChange}
                 />
                 <Form.Group widths="equal">
-                  <Form.Field label="Gender" control="select" onChange={this.genderOnChange}>
+                  <Form.Field
+                    label="Gender"
+                    control="select"
+                    onChange={this.genderOnChange}
+                  >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </Form.Field>

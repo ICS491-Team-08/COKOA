@@ -45,7 +45,7 @@ class InfoCollection {
 
       gender: {
         type: String,
-        allowedValues: ['Male', 'Female']
+        allowedValues: ['male', 'female']
       },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
