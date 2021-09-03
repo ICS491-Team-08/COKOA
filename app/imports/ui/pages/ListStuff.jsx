@@ -39,8 +39,20 @@ class ListStuff extends React.Component {
     // console.log(this.props);
   }
 
+  submit = () => {
+    const { _id } = this.props.info;
+    const { gender, vaccinated, vaccineType, vaccineLot } = this.state;
+    Info.collection.update(
+      _id,
+      { $set: { gender, vaccinated, vaccineType, vaccineLot } },
+      (error) =>
+        error
+          ? swal("Error", error.message, "error")
+          : swal("Success", "Item updated successfully", "success")
+    );
+  };
+
   componentDidUpdate(prevProps) {
-    // console.log("this.state", this.props);
     if (this.props.info && this.props.info._id !== prevProps.info?._id) {
       console.log("hi");
       this.setState({
@@ -116,7 +128,11 @@ class ListStuff extends React.Component {
                   value={this.state?.vaccineLot}
                   onChange={this.handleChange}
                 />
-                <Form.Button id="signup-form-submit" content="Submit" />
+                <Form.Button
+                  id="signup-form-submit"
+                  content="Submit"
+                  onSubmit={this.submit}
+                />
               </Segment>
             </Form>
           </Grid.Column>
