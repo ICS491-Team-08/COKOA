@@ -1,5 +1,14 @@
 import React from "react";
-import { Grid, Segment, Header } from "semantic-ui-react";
+import {
+  Grid,
+  Segment,
+  Header,
+  Rating,
+  Table,
+  Form,
+  Button,
+  Checkbox,
+} from "semantic-ui-react";
 import {
   AutoForm,
   ErrorsField,
@@ -29,6 +38,70 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
+const TableExampleStriped = () => (
+  <Table striped>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>Date</Table.HeaderCell>
+        <Table.HeaderCell>Location</Table.HeaderCell>
+        <Table.HeaderCell>Mood</Table.HeaderCell>
+        <Table.HeaderCell>Sick</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>John Lilki</Table.Cell>
+        <Table.Cell>September 14, 2013</Table.Cell>
+        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+        <Table.Cell>No</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Jamie Harington</Table.Cell>
+        <Table.Cell>January 11, 2014</Table.Cell>
+        <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
+        <Table.Cell>Yes</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Jill Lewis</Table.Cell>
+        <Table.Cell>May 11, 2014</Table.Cell>
+        <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+        <Table.Cell>Yes</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>John Lilki</Table.Cell>
+        <Table.Cell>September 14, 2013</Table.Cell>
+        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+        <Table.Cell>No</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>John Lilki</Table.Cell>
+        <Table.Cell>September 14, 2013</Table.Cell>
+        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+        <Table.Cell>No</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Jamie Harington</Table.Cell>
+        <Table.Cell>January 11, 2014</Table.Cell>
+        <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
+        <Table.Cell>Yes</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Jill Lewis</Table.Cell>
+        <Table.Cell>May 11, 2014</Table.Cell>
+        <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
+        <Table.Cell>Yes</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>John Lilki</Table.Cell>
+        <Table.Cell>September 14, 2013</Table.Cell>
+        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
+        <Table.Cell>No</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+);
+
 /** Renders the Page for adding a document. */
 class AddStuff extends React.Component {
   // On submit, insert the data.
@@ -47,29 +120,39 @@ class AddStuff extends React.Component {
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   render() {
-    let fRef = null;
+    const date = new Date();
     return (
       <Grid container centered>
         <Grid.Column>
           <Header as="h2" textAlign="center">
-            Add Stuff
+            Current Health Status
           </Header>
-          <AutoForm
-            ref={(ref) => {
-              fRef = ref;
-            }}
-            schema={bridge}
-            onSubmit={(data) => this.submit(data, fRef)}
-          >
-            <Segment>
-              <TextField name="name" />
-              {/* <RadioField label="do you feel any symptoms of COVID-19" name="yesorno" allowedValues={["Yes", "No"]} inline/> */}
-              <NumField name="quantity" decimal={false} />
-              <SelectField name="condition" />
-              <SubmitField value="Submit" />
-              <ErrorsField />
-            </Segment>
-          </AutoForm>
+          <Segment>
+            <Form>
+              <Form.Field>
+                <label>Date</label>
+                <input value={date.toLocaleString()} disabled/>
+              </Form.Field>
+              <Form.Field>
+                <label>Location</label>
+                <input placeholder="Location" />
+              </Form.Field>
+              <Form.Field>
+                <label>Mood</label>
+                <Rating
+                  maxRating={5}
+                  defaultRating={5}
+                  icon="star"
+                  size="huge"
+                />
+              </Form.Field>
+              <Form.Field>
+                <Checkbox label="I feel sick today. I need to rest." />
+              </Form.Field>
+              <Button type="submit">Submit</Button>
+            </Form>
+          </Segment>
+          <TableExampleStriped />
         </Grid.Column>
       </Grid>
     );
