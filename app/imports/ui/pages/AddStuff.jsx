@@ -22,21 +22,21 @@ import swal from "sweetalert";
 import { Meteor } from "meteor/meteor";
 import SimpleSchema2Bridge from "uniforms-bridge-simple-schema-2";
 import SimpleSchema from "simpl-schema";
-import { Stuffs } from "../../api/stuff/Stuff";
+import { Stuffs, Status } from "../../api/stuff/Stuff";
 
-// Create a schema to specify the structure of the data to appear in the form.
-const formSchema = new SimpleSchema({
-  name: String,
-  quantity: Number,
-  // yesorno: Boolean,
-  condition: {
-    type: String,
-    allowedValues: ["excellent", "good", "fair", "poor"],
-    defaultValue: "good",
-  },
-});
+// // Create a schema to specify the structure of the data to appear in the form.
+// const formSchema = new SimpleSchema({
+//   name: String,
+//   quantity: Number,
+//   // yesorno: Boolean,
+//   condition: {
+//     type: String,
+//     allowedValues: ["excellent", "good", "fair", "poor"],
+//     defaultValue: "good",
+//   },
+// });
 
-const bridge = new SimpleSchema2Bridge(formSchema);
+// const bridge = new SimpleSchema2Bridge(formSchema);
 
 const TableExampleStriped = () => (
   <Table striped>
@@ -104,21 +104,42 @@ const TableExampleStriped = () => (
 
 /** Renders the Page for adding a document. */
 class AddStuff extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: "home?",
+      mood: 5,
+      sick: false,
+    };
+  }
   // On submit, insert the data.
-  submit(data, formRef) {
-    const { name, quantity, condition } = data;
+  submit() {
+    const date = new Date();
+    const now = date.toLocaleString();
+
+    const { location, mood, sick } = this.state;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, quantity, condition, owner }, (error) => {
-      if (error) {
-        swal("Error", error.message, "error");
-      } else {
-        swal("Success", "Item added successfully", "success");
-        formRef.reset();
+    Status.collection.insert(
+      { date: now, location, mood, sick, owner },
+      (error) => {
+        if (error) {
+          swal("Error", error.message, "error");
+        } else {
+          swal("Success", "Item added successfully", "success");
+          // formRef.reset();
+        }
       }
-    });
+    );
   }
 
+  checkboxHandler = () => {
+    this.setState((prevState) => ({ sick: !prevState.sick }));
+  };
+  handleRate = (e, { rating }) => this.setState({ mood: rating });
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
+
+  locationOnChange = (e) => this.setState({ location: e.target.value });
+
   render() {
     const date = new Date();
     return (
@@ -131,11 +152,15 @@ class AddStuff extends React.Component {
             <Form>
               <Form.Field>
                 <label>Date</label>
-                <input value={date.toLocaleString()} disabled/>
+                <input value={date.toLocaleString()} disabled />
               </Form.Field>
               <Form.Field>
                 <label>Location</label>
-                <input placeholder="Location" />
+                <input
+                  placeholder="Location"
+                  value={this.state.location}
+                  onChange={this.locationOnChange}
+                />
               </Form.Field>
               <Form.Field>
                 <label>Mood</label>
@@ -144,10 +169,16 @@ class AddStuff extends React.Component {
                   defaultRating={5}
                   icon="star"
                   size="huge"
+                  onRate={this.handleRate}
                 />
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
               </Form.Field>
               <Form.Field>
-                <Checkbox label="I feel sick today. I need to rest." />
+                <Checkbox
+                  label="I feel sick today. I need to rest."
+                  checked={this.state.sick}
+                  onChange={this.checkboxHandler}
+                />
               </Form.Field>
               <Button type="submit">Submit</Button>
             </Form>
