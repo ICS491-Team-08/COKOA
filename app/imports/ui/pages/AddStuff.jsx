@@ -22,7 +22,9 @@ import swal from "sweetalert";
 import { Meteor } from "meteor/meteor";
 import SimpleSchema2Bridge from "uniforms-bridge-simple-schema-2";
 import SimpleSchema from "simpl-schema";
+import { withTracker } from "meteor/react-meteor-data";
 import { Stuffs, Status } from "../../api/stuff/Stuff";
+import PropTypes from "prop-types";
 
 // // Create a schema to specify the structure of the data to appear in the form.
 // const formSchema = new SimpleSchema({
@@ -38,7 +40,7 @@ import { Stuffs, Status } from "../../api/stuff/Stuff";
 
 // const bridge = new SimpleSchema2Bridge(formSchema);
 
-const TableExampleStriped = () => (
+const TableExampleStriped = ({ doc }) => (
   <Table striped>
     <Table.Header>
       <Table.Row>
@@ -50,54 +52,28 @@ const TableExampleStriped = () => (
     </Table.Header>
 
     <Table.Body>
-      <Table.Row>
-        <Table.Cell>John Lilki</Table.Cell>
-        <Table.Cell>September 14, 2013</Table.Cell>
-        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-        <Table.Cell>No</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jamie Harington</Table.Cell>
-        <Table.Cell>January 11, 2014</Table.Cell>
-        <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jill Lewis</Table.Cell>
-        <Table.Cell>May 11, 2014</Table.Cell>
-        <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>John Lilki</Table.Cell>
-        <Table.Cell>September 14, 2013</Table.Cell>
-        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-        <Table.Cell>No</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>John Lilki</Table.Cell>
-        <Table.Cell>September 14, 2013</Table.Cell>
-        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-        <Table.Cell>No</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jamie Harington</Table.Cell>
-        <Table.Cell>January 11, 2014</Table.Cell>
-        <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jill Lewis</Table.Cell>
-        <Table.Cell>May 11, 2014</Table.Cell>
-        <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>John Lilki</Table.Cell>
-        <Table.Cell>September 14, 2013</Table.Cell>
-        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-        <Table.Cell>No</Table.Cell>
-      </Table.Row>
+      {doc.map((el) => (
+        <Table.Row key={el._id}>
+          <Table.Cell>{el.date}</Table.Cell>
+          <Table.Cell>{el.location}</Table.Cell>
+          <Table.Cell>
+            <Rating
+              maxRating={5}
+              defaultRating={el.mood}
+              icon="star"
+              size="huge"
+              disabled
+            />
+          </Table.Cell>
+          <Table.Cell>
+            <Checkbox
+              label="I feel sick today. I need to rest."
+              checked={el.sick}
+              disabled
+            />
+          </Table.Cell>
+        </Table.Row>
+      ))}
     </Table.Body>
   </Table>
 );
@@ -107,16 +83,15 @@ class AddStuff extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: "home?",
+      location: "home",
       mood: 5,
       sick: false,
     };
   }
   // On submit, insert the data.
-  submit() {
+  submit = () => {
     const date = new Date();
     const now = date.toLocaleString();
-
     const { location, mood, sick } = this.state;
     const owner = Meteor.user().username;
     Status.collection.insert(
@@ -130,7 +105,7 @@ class AddStuff extends React.Component {
         }
       }
     );
-  }
+  };
 
   checkboxHandler = () => {
     this.setState((prevState) => ({ sick: !prevState.sick }));
@@ -171,7 +146,6 @@ class AddStuff extends React.Component {
                   size="huge"
                   onRate={this.handleRate}
                 />
-                <pre>{JSON.stringify(this.state, null, 2)}</pre>
               </Form.Field>
               <Form.Field>
                 <Checkbox
@@ -180,14 +154,34 @@ class AddStuff extends React.Component {
                   onChange={this.checkboxHandler}
                 />
               </Form.Field>
-              <Button type="submit">Submit</Button>
+              <Button type="submit" onClick={this.submit}>
+                Submit
+              </Button>
             </Form>
           </Segment>
-          <TableExampleStriped />
+          <TableExampleStriped doc={this.props.doc} />
         </Grid.Column>
       </Grid>
     );
   }
 }
 
-export default AddStuff;
+AddStuff.propTypes = {
+  doc: PropTypes.array,
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const documentId = Meteor.userId();
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe(Status.userPublicationName);
+  // Determine if the subscription is ready
+  const ready = subscription.ready();
+  // Get the document
+  const doc = Status.collection.find({}).fetch();
+  return {
+    doc,
+    ready,
+  };
+})(AddStuff);
