@@ -4,6 +4,12 @@ import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
+
+const options = [
+  { key: 'm', text: 'Male', value: 'male' },
+  { key: 'f', text: 'Female', value: 'female' },
+  { key: 'o', text: 'Other', value: 'other' },
+]
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
@@ -11,7 +17,7 @@ class Signup extends React.Component {
   /* Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '', error: '', redirectToReferer: false };
+    this.state = { email: '', password: '', dob: '', gender:'', address:'', vaccination:'', error: '', redirectToReferer: false };
   }
 
   /* Update the form controls each time the user interacts with them. */
@@ -21,8 +27,9 @@ class Signup extends React.Component {
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
-    const { email, password } = this.state;
-    Accounts.createUser({ email, username: email, password }, (err) => {
+    console.log(this.state);
+    const { email, password, dob, gender, address, vaccination } = this.state;
+    Accounts.createUser({ email, username: email, password, dob, gender, address, vaccination }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
@@ -65,6 +72,46 @@ class Signup extends React.Component {
                   name="password"
                   placeholder="Password"
                   type="password"
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label="Date of Birth"
+                  id="signup-form-dob"
+                  icon="calendar"
+                  iconPosition="left"
+                  name="dob"
+                  placeholder="mm/dd/yyyy"
+                  type="dob"
+                  onChange={this.handleChange}
+                />
+                <Form.Select
+                  fluid label="Gender"
+                  id="signup-form-gender"
+                  //icon="users"
+                  name="gender"
+                  placeholder="gender"
+                  type="gender"
+                  options={options}
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label="Address"
+                  id="signup-form-address"
+                  icon="address card"
+                  iconPosition="left"
+                  name="address"
+                  placeholder="ex) 1111 Punahou St apt 303, Honolulu, HI, 96916"
+                  type="address"
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label="Vaccination"
+                  id="signup-form-vaccination"
+                  icon="syringe"
+                  iconPosition="left"
+                  name="vaccination"
+                  placeholder="vaccination"
+                  type="vaccination"
                   onChange={this.handleChange}
                 />
                 <Form.Button id="signup-form-submit" content="Submit"/>

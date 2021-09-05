@@ -1,7 +1,9 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "admin@foo.com", "password": "changeme", "dob": "01/01/2000", "gender": "male", "address": "temp", "vaccination":
+      "TBD", "role": "admin" },
+    { "email": "john@foo.com", "password": "changeme", "dob": "01/01/2000", "gender": "female", "address": "temp", "vaccination":
+      "TBD" }
   ],
 
   "defaultData": [
