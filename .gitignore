@@ -5,3 +5,8 @@ node_modules
 settings.production.json
 app/.deploy/mup.js
 app/.deploy/settings.json
+app/package.json
+app/package-lock.json
+app/.meteor/versions
+app/.meteor/release
+app/.meteor/packages
