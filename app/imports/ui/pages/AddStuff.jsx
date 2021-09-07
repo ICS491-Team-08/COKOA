@@ -29,7 +29,7 @@ class AddStuff extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { name, dob, gender, address, vaccination} = data;
+    const { name, dob, gender, address, vaccination } = data;
     const owner = Meteor.user().username;
 
     console.log(this.props.stuffs.length);
@@ -60,9 +60,9 @@ class AddStuff extends React.Component {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
               <TextField name='name'/>
-              <TextField name='dob' />
+              <TextField name='dob' label='Date of Birth' placeholder='DD/MM/YYYY'/>
               <SelectField name='gender'/>
-              <TextField name='address' />
+              <TextField name='address' placeholder='ex) 1113 Sunshine St apt 303, Honolulu, HI, 96814'/>
               <TextField name='vaccination' />
               <SubmitField value='Submit'/>
               <ErrorsField/>
