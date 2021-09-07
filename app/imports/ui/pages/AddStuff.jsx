@@ -6,6 +6,8 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Stuffs } from '../../api/stuff/Stuff';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -27,7 +29,14 @@ class AddStuff extends React.Component {
   submit(data, formRef) {
     const { name, quantity, condition } = data;
     const owner = Meteor.user().username;
-    Stuffs.collection.insert({ name, quantity, condition, owner },
+
+    console.log(this.props.stuffs.length);
+
+    if(this.props.stuffs.length !== 0){
+      alert("Your profile is already registered!");
+    }
+
+    else {Stuffs.collection.insert({ name, quantity, condition, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -36,6 +45,7 @@ class AddStuff extends React.Component {
           formRef.reset();
         }
       });
+    }
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
@@ -60,4 +70,20 @@ class AddStuff extends React.Component {
   }
 }
 
-export default AddStuff;
+AddStuff.propTypes = {
+  stuffs: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe(Stuffs.userPublicationName);
+  // Determine if the subscription is ready
+  const ready = subscription.ready();
+  // Get the Stuff documents
+  const stuffs = Stuffs.collection.find({}).fetch();
+  return {
+    stuffs,
+    ready,
+  };
+})(AddStuff);
