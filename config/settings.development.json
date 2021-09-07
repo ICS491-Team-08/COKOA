@@ -7,9 +7,7 @@
   ],
 
   "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+    { "name": "John Legend", "dob": "01/01/2001", "owner": "john@foo.com", "gender": "Male", "address": "1111 Punahou St", "vaccination": "Vaccinated"},
+    { "name": "Admin Doe", "dob": "11/11/2000", "owner": "admin@foo.com", "gender": "Female", "address": "2222 Manoa St", "vaccination": "Vaccinated"}
   ]
 }

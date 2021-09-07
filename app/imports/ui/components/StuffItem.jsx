@@ -9,8 +9,10 @@ class StuffItem extends React.Component {
     return (
       <Table.Row>
         <Table.Cell>{this.props.stuff.name}</Table.Cell>
-        <Table.Cell>{this.props.stuff.quantity}</Table.Cell>
-        <Table.Cell>{this.props.stuff.condition}</Table.Cell>
+        <Table.Cell>{this.props.stuff.dob}</Table.Cell>
+        <Table.Cell>{this.props.stuff.gender}</Table.Cell>
+        <Table.Cell>{this.props.stuff.address}</Table.Cell>
+        <Table.Cell>{this.props.stuff.vaccination}</Table.Cell>
         <Table.Cell>
           <Link to={`/edit/${this.props.stuff._id}`}>Edit</Link>
         </Table.Cell>
@@ -23,8 +25,10 @@ class StuffItem extends React.Component {
 StuffItem.propTypes = {
   stuff: PropTypes.shape({
     name: PropTypes.string,
-    quantity: PropTypes.number,
-    condition: PropTypes.string,
+    dob: PropTypes.string,
+    gender: PropTypes.string,
+    address: PropTypes.string,
+    vaccination: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
