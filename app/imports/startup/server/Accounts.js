@@ -1,11 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
+import { UserInfo } from '../../api/userinfo/UserInfo';
 
 /* eslint-disable no-console */
 
-function createUser(email, password, role) {
+function createUser(email, password, firstName, lastName, gender, vaccine, role) {
   console.log(`  Creating user ${email}.`);
+  UserInfo.insert({ user: email, firstName: firstName, lastName: lastName, gender: gender, vaccine: vaccine });
   const userID = Accounts.createUser({
     username: email,
     email: email,
@@ -21,7 +23,7 @@ function createUser(email, password, role) {
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
     console.log('Creating the default user(s)');
-    Meteor.settings.defaultAccounts.map(({ email, password, role }) => createUser(email, password, role));
+    Meteor.settings.defaultAccounts.map(({ email, password, firstName, lastName, gender, vaccine, role }) => createUser(email, password, firstName, lastName, gender, vaccine, role));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }

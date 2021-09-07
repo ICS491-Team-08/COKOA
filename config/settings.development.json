@@ -1,7 +1,22 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "_id": "1",
+      "email": "admin@foo.com",
+      "password": "changeme",
+      "role": "admin",
+      "firstName": "Yeji",
+      "lastName": "Han",
+      "gender": "F",
+      "vaccine": 3
+    },
+    { "_id": "2",
+      "email": "john@foo.com",
+      "password": "changeme",
+      "firstName": "John",
+      "lastName": "Foo",
+      "gender": "M",
+      "vaccine": 1
+    }
   ],
 
   "defaultData": [
