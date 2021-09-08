@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
+import { Profiles } from '../../api/profile/Profile';
 import { UserInfo } from '../../api/userinfo/UserInfo';
 
 // User-level publication.
@@ -33,7 +34,25 @@ Meteor.publish(null, function () {
 
 Meteor.publish('UserInfo', function () {
   if (this.userId) {
-    return UserInfo.find();
+    const username = Meteor.users.findOne(this.userId).username;
+    return UserInfo.find({ user: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Profiles.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Profiles.collection.find({ user: username });
+  }
+  return this.ready();
+});
+
+// Admin-level publication.
+// If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
+Meteor.publish(Profiles.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Profiles.collection.find();
   }
   return this.ready();
 });

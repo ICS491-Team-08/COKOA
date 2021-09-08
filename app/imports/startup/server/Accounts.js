@@ -2,12 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
 import { UserInfo } from '../../api/userinfo/UserInfo';
+import { Profiles } from '../../api/profile/Profile';
 
 /* eslint-disable no-console */
-
 function createUser(email, password, firstName, lastName, gender, vaccine, role) {
   console.log(`  Creating user ${email}.`);
   UserInfo.insert({ user: email, firstName: firstName, lastName: lastName, gender: gender, vaccine: vaccine });
+  // Profiles.insert({ user: email, firstName: firstName, lastName: lastName, gender: gender, vaccine: vaccine });
   const userID = Accounts.createUser({
     username: email,
     email: email,

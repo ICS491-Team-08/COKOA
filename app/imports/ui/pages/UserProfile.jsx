@@ -20,9 +20,11 @@ class UserProfile extends React.Component {
     };
 
     return (
+        <Container textAling='center'>
+          <Header as='h1'>My Profile</Header>
           <Table celled style={fontStyle}>
             <Table.Header><Table.Row>
-              <Table.HeaderCell>User</Table.HeaderCell>
+              <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>First Name</Table.HeaderCell>
               <Table.HeaderCell>Last Name</Table.HeaderCell>
               <Table.HeaderCell>Gender</Table.HeaderCell>
@@ -40,6 +42,7 @@ class UserProfile extends React.Component {
               </Table.Row>) }
             </Table.Body>
           </Table>
+        </Container>
     );
   }
 }
