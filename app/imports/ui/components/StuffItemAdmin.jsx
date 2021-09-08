@@ -11,6 +11,7 @@ class StuffItemAdmin extends React.Component {
         <Table.Cell>{this.props.stuff.dob}</Table.Cell>
         <Table.Cell>{this.props.stuff.gender}</Table.Cell>
         <Table.Cell>{this.props.stuff.address}</Table.Cell>
+        <Table.Cell>{this.props.stuff.status}</Table.Cell>
         <Table.Cell>{this.props.stuff.vaccination}</Table.Cell>
         <Table.Cell>{this.props.stuff.owner}</Table.Cell>
       </Table.Row>
@@ -25,6 +26,7 @@ StuffItemAdmin.propTypes = {
     dob: PropTypes.string,
     gender: PropTypes.string,
     address: PropTypes.string,
+    status: PropTypes.string,
     vaccination: PropTypes.string,
     _id: PropTypes.string,
     owner: PropTypes.string,

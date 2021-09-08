@@ -26,6 +26,7 @@ class ListStuffAdmin extends React.Component {
               <Table.HeaderCell>Date of Birth</Table.HeaderCell>
               <Table.HeaderCell>Gender</Table.HeaderCell>
               <Table.HeaderCell>Address</Table.HeaderCell>
+              <Table.HeaderCell>COVID Status</Table.HeaderCell>
               <Table.HeaderCell>Vaccination</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
             </Table.Row>

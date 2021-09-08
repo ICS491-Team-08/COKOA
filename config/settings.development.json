@@ -7,7 +7,7 @@
   ],
 
   "defaultData": [
-    { "name": "John Legend", "dob": "01/01/2001", "owner": "john@foo.com", "gender": "Male", "address": "1111 Punahou St", "vaccination": "Vaccinated"},
-    { "name": "Admin Doe", "dob": "11/11/2000", "owner": "admin@foo.com", "gender": "Female", "address": "2222 Manoa St", "vaccination": "Vaccinated"}
+    { "name": "John Legend", "dob": "01/01/2001", "owner": "john@foo.com", "gender": "Male", "address": "1111 Punahou St", "status": "Negative", "vaccination": "Yes, I am fully vaccinated"},
+    { "name": "Admin Doe", "dob": "11/11/2000", "owner": "admin@foo.com", "gender": "Female", "address": "2222 Manoa St", "status": "Negative", "vaccination": "No, I am not vaccinated"}
   ]
 }

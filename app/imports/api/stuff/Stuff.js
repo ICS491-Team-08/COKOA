@@ -22,7 +22,16 @@ class StuffsCollection {
         defaultValue: 'Would rather not say',
       },
       address: String,
-      vaccination: String,
+      status: {
+        type: String,
+        allowedValues: ['Not Sure', 'Positive', 'Negative'],
+        defaultValue: 'Negative',
+      },
+      vaccination: {
+        type: String,
+        allowedValues: ['Yes, I am fully vaccinated', 'No, I am not vaccinated', 'I only got 1st shot'],
+        defaultValue: 'No, I am not vaccinated',
+      },
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

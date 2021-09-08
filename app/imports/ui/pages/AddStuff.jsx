@@ -15,11 +15,20 @@ const formSchema = new SimpleSchema({
   dob: String,
   gender: {
     type: String,
-    allowedValues: ['Would rather not say', 'Male', 'Female', 'etc'],
+    allowedValues: ['Would rather not say', 'Male', 'Female', 'Etc'],
     defaultValue: 'Would rather not say',
   },
   address: String,
-  vaccination: String,
+  status: {
+    type: String,
+    allowedValues: ['Not Sure', 'Positive', 'Negative'],
+    defaultValue: 'Not Sure',
+  },
+  vaccination: {
+    type: String,
+    allowedValues: ['Yes, I am fully vaccinated', 'I only got 1st shot', 'No, I am not vaccinated'],
+    defaultValue: 'Yes, I am fully vaccinated',
+  },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -29,7 +38,7 @@ class AddStuff extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { name, dob, gender, address, vaccination } = data;
+    const { name, dob, gender, address, status, vaccination } = data;
     const owner = Meteor.user().username;
 
     console.log(this.props.stuffs.length);
@@ -38,7 +47,7 @@ class AddStuff extends React.Component {
       alert("Your profile is already registered!");
     }
 
-    else {Stuffs.collection.insert({ name, dob, gender, address, vaccination, owner },
+    else {Stuffs.collection.insert({ name, dob, gender, address, status, vaccination, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -63,7 +72,8 @@ class AddStuff extends React.Component {
               <TextField name='dob' label='Date of Birth' placeholder='DD/MM/YYYY'/>
               <SelectField name='gender'/>
               <TextField name='address' placeholder='ex) 1113 Sunshine St apt 303, Honolulu, HI, 96814'/>
-              <TextField name='vaccination' />
+              <SelectField name='status' label='COVID Status'/>
+              <SelectField name='vaccination'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>

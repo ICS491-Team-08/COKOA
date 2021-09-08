@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import { Table, Card, Container, Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Stuffs } from '../../api/stuff/Stuff';
@@ -17,24 +17,14 @@ class ListStuff extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
+
+
       <Container>
-        <Header as="h2" textAlign="center">User Profile</Header>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Date of Birth</Table.HeaderCell>
-              <Table.HeaderCell>Gender</Table.HeaderCell>
-              <Table.HeaderCell>Address</Table.HeaderCell>
-              <Table.HeaderCell>Vaccination</Table.HeaderCell>
-              <Table.HeaderCell>Edit</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
+          <Header as="h2" textAlign="center">User Profile </Header>
+          <Card.Group centered>
             {this.props.stuffs.map((stuff) => <StuffItem key={stuff._id} stuff={stuff} />)}
-          </Table.Body>
-        </Table>
-      </Container>
+          </Card.Group>
+        </Container>
     );
   }
 }

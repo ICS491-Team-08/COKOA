@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Image, Card, Feed } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -7,16 +7,25 @@ import { withRouter, Link } from 'react-router-dom';
 class StuffItem extends React.Component {
   render() {
     return (
-      <Table.Row>
-        <Table.Cell>{this.props.stuff.name}</Table.Cell>
-        <Table.Cell>{this.props.stuff.dob}</Table.Cell>
-        <Table.Cell>{this.props.stuff.gender}</Table.Cell>
-        <Table.Cell>{this.props.stuff.address}</Table.Cell>
-        <Table.Cell>{this.props.stuff.vaccination}</Table.Cell>
-        <Table.Cell>
-          <Link to={`/edit/${this.props.stuff._id}`}>Edit</Link>
-        </Table.Cell>
-      </Table.Row>
+
+      <Card>
+          <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} />
+          <Card.Content>
+            <Card.Header>{this.props.stuff.name}</Card.Header>
+            <br></br>
+            <Card.Meta>DOB: {this.props.stuff.dob}</Card.Meta>
+            <Card.Meta>Gender: {this.props.stuff.gender}</Card.Meta>
+            <Card.Meta>Address: {this.props.stuff.address}</Card.Meta>
+            <br></br>
+            <Card.Description> COVID Status: {this.props.stuff.status}</Card.Description>
+            <Card.Description> Vaccinated?: {this.props.stuff.vaccination}</Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <Feed>
+              <Link to={`/edit/${this.props.stuff._id}`}>Edit</Link>
+            </Feed>
+          </Card.Content>
+        </Card>
     );
   }
 }
@@ -28,6 +37,7 @@ StuffItem.propTypes = {
     dob: PropTypes.string,
     gender: PropTypes.string,
     address: PropTypes.string,
+    status: PropTypes.string,
     vaccination: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,

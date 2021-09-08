@@ -38,7 +38,8 @@ class EditStuff extends React.Component {
               <TextField name='dob'/>
               <SelectField name='gender'/>
               <TextField name='address'/>
-              <TextField name='vaccination'/>
+              <SelectField name='status'/>
+              <SelectField name='vaccination'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner' />
