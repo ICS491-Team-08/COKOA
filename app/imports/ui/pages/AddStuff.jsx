@@ -118,7 +118,7 @@ class AddStuff extends React.Component {
   render() {
     const date = new Date();
     return (
-      <Grid container centered>
+      <Grid centered style={{width: "40rem"}}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
             Current Health Status

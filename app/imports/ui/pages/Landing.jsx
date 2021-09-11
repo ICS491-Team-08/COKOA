@@ -106,145 +106,20 @@ const Center = () => {
         </Card.Content>
       </Card>
       <Header as="h1">Action Required</Header>
-      <Divider style={{width: "100%"}}/>
+      <Divider style={{ width: "100%" }} />
       <br />
       <Body />
     </div>
   );
 };
 
-const Left = (activeItem) => {
-  return (
-    <div style={{ marginTop: "3rem" }}>
-      <Menu vertical>
-        <Menu.Item>
-          <Menu.Header>Home</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="Virtual ID"
-              active={activeItem === "enterprise"}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="Usage"
-              active={activeItem === "consumer"}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu.Item>
-
-        <Menu.Item>
-          <Menu.Header>Status</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="Daily Check Up"
-              active={activeItem === "rails"}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="History"
-              active={activeItem === "php"}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu.Item>
-
-        <Menu.Item>
-          <Menu.Header>Information</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="Vaccination Record"
-              active={activeItem === "shared"}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="Personal Record"
-              active={activeItem === "dedicated"}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu.Item>
-
-        <Menu.Item>
-          <Menu.Header>Support</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="email"
-              active={activeItem === "email"}
-              onClick={this.handleItemClick}
-            >
-              E-mail Support
-            </Menu.Item>
-
-            <Menu.Item
-              name="faq"
-              active={activeItem === "faq"}
-              onClick={this.handleItemClick}
-            >
-              FAQs
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu.Item>
-      </Menu>
-    </div>
-  );
-};
-
-const Right = (activeItem) => {
-  return (
-    <div style={{ marginTop: "3rem", height: "21rem" }}>
-      <Menu vertical>
-        <Menu.Item
-          name="promotions"
-          active={activeItem === "promotions"}
-          onClick={this.handleItemClick}
-        >
-          <Header as="h4">CDC Guidance</Header>
-          <p>Check out CDC Guidance webpage</p>
-        </Menu.Item>
-
-        <Menu.Item
-          name="coupons"
-          active={activeItem === "coupons"}
-          onClick={this.handleItemClick}
-        >
-          <Header as="h4">Hawaii Guidance</Header>
-          <p>Check out Hawaii Guidance webpage</p>
-        </Menu.Item>
-
-        <Menu.Item
-          name="rebates"
-          active={activeItem === "rebates"}
-          onClick={this.handleItemClick}
-        >
-          <Header as="h4">Covid-19 Testing Center</Header>
-          <p>Visit nearest Covid-19 Testing Center</p>
-        </Menu.Item>
-      </Menu>
-    </div>
-  );
-};
-
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeItem: "bio",
-    };
-  }
 
   render() {
-    const { activeItem } = this.state;
     return (
       <div className="landing-body">
-        <Left activeItem={activeItem} />
         <Center />
-        <Right />
       </div>
     );
   }
