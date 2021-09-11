@@ -43,8 +43,8 @@ class InfoCollection {
       {
         name: String,
         vaccinated: Boolean,
-        vaccineType: String,
-        vaccineLot: String,
+        vaccineType: { type: String, optional: true },
+        vaccineLot: { type: String, optional: true },
         owner: String,
         gender: {
           type: String,

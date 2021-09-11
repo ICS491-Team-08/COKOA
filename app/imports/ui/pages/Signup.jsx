@@ -46,24 +46,29 @@ class Signup extends React.Component {
   submit = () => {
     const { email, password } = this.state;
     const { name, gender, vaccinated, vaccineType, vaccineLot } = this.state;
-    Accounts.createUser({ email, username: email, password }, (err) => {
-      if (err) {
-        this.setState({ error: err.reason });
-      } else {
-        this.setState({ error: "", redirectToReferer: true });
-      }
-    });
-    Info.collection.insert(
-      { name, gender, vaccinated, vaccineType, vaccineLot, owner: email },
-      (error) => {
-        if (error) {
-          swal("Error", error.message, "error");
+    console.log(this.state);
+    if (name !== "") {
+      Accounts.createUser({ email, username: email, password }, (err) => {
+        if (err) {
+          this.setState({ error: err.reason });
         } else {
-          swal("Success", "Item added successfully", "success");
-          // formRef.reset();
+          this.setState({ error: "", redirectToReferer: true });
         }
-      }
-    );
+      });
+    }
+    if (email !== "" && password !== "") {
+      Info.collection.insert(
+        { name, gender, vaccinated, vaccineType, vaccineLot, owner: email },
+        (error) => {
+          if (error) {
+            swal("Error", error.message, "error");
+          } else {
+            swal("Success", "Item added successfully", "success");
+            // formRef.reset();
+          }
+        }
+      );
+    }
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
