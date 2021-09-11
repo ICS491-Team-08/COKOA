@@ -36,16 +36,11 @@ class Signup extends React.Component {
 
   /* Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
-    console.log(name, value);
     this.setState({ [name]: value });
   };
   genderOnChange = (e) => {
     this.setState({ gender: e.target.value });
-    console.log(e.target.value);
   };
-  componentDidUpdate() {
-    console.log(this.state);
-  }
 
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
@@ -74,7 +69,7 @@ class Signup extends React.Component {
   /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
     const { from } = this.props.location.state || {
-      from: { pathname: "/add" },
+      from: { pathname: "/home" },
     };
     // if correct authentication, redirect to from: page instead of signup screen
     if (this.state.redirectToReferer) {

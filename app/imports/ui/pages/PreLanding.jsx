@@ -8,6 +8,7 @@ import {
   Button,
   Image,
 } from "semantic-ui-react";
+import { NavLink } from 'react-router-dom';
 
 /** Render a Not Found page if the user enters a URL that doesn't match any route. */
 class PreLanding extends React.Component {
@@ -34,14 +35,14 @@ class PreLanding extends React.Component {
                     <Icon name="sign-in" />
                   </Header>
 
-                  <Button primary>Sign-In</Button>
+                  <Button as={NavLink} exact to="/signin" primary>Sign-In</Button>
                 </Grid.Column>
 
                 <Grid.Column>
                   <Header icon>
                     <Icon name="signup" />
                   </Header>
-                  <Button color="green">Sign-Up</Button>
+                  <Button color="green" as={NavLink} exact to="/signup">Sign-Up</Button>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

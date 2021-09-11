@@ -1,20 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Meteor } from 'meteor/meteor';
-import 'semantic-ui-css/semantic.css';
-import { Roles } from 'meteor/alanning:roles';
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import MainHeader from '../components/MainHeader';
-import Footer from '../components/Footer';
-import Landing from '../pages/Landing';
-import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
-import NotFound from '../pages/NotFound';
-import Signin from '../pages/Signin';
-import Signup from '../pages/Signup';
-import Signout from '../pages/Signout';
+import React from "react";
+import PropTypes from "prop-types";
+import { Meteor } from "meteor/meteor";
+import "semantic-ui-css/semantic.css";
+import { Roles } from "meteor/alanning:roles";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import MainHeader from "../components/MainHeader";
+import Footer from "../components/Footer";
+import Landing from "../pages/Landing";
+import ListStuff from "../pages/ListStuff";
+import ListStuffAdmin from "../pages/ListStuffAdmin";
+import AddStuff from "../pages/AddStuff";
+import EditStuff from "../pages/EditStuff";
+import NotFound from "../pages/NotFound";
+import Signin from "../pages/Signin";
+import Signup from "../pages/Signup";
+import Signout from "../pages/Signout";
+import PreLanding from "../pages/PreLanding";
+import { withTracker } from "meteor/react-meteor-data";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -22,19 +29,20 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <MainHeader/>
+          {this.props.userId !== null && <MainHeader />}
           <Switch>
-            <Route exact path="/" component={Landing}/>
-            <Route path="/signin" component={Signin}/>
-            <Route path="/signup" component={Signup}/>
-            <Route path="/signout" component={Signout}/>
-            <ProtectedRoute path="/list" component={ListStuff}/>
-            <ProtectedRoute path="/add" component={AddStuff}/>
-            <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
-            <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
-            <Route component={NotFound}/>
+            <Route exact path="/" component={PreLanding} />
+            <Route exact path="/home" component={Landing} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/signout" component={Signout} />
+            <ProtectedRoute path="/list" component={ListStuff} />
+            <ProtectedRoute path="/add" component={AddStuff} />
+            <ProtectedRoute path="/edit/:_id" component={EditStuff} />
+            <AdminProtectedRoute path="/admin" component={ListStuffAdmin} />
+            <Route component={NotFound} />
           </Switch>
-          <Footer/>
+          <Footer />
         </div>
       </Router>
     );
@@ -51,10 +59,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={(props) => {
       const isLogged = Meteor.userId() !== null;
-      return isLogged ?
-        (<Component {...props} />) :
-        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
-        );
+      return isLogged ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{ pathname: "/signin", state: { from: props.location } }}
+        />
+      );
     }}
   />
 );
@@ -69,11 +80,14 @@ const AdminProtectedRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={(props) => {
       const isLogged = Meteor.userId() !== null;
-      const isAdmin = Roles.userIsInRole(Meteor.userId(), 'admin');
-      return (isLogged && isAdmin) ?
-        (<Component {...props} />) :
-        (<Redirect to={{ pathname: '/signin', state: { from: props.location } }}/>
-        );
+      const isAdmin = Roles.userIsInRole(Meteor.userId(), "admin");
+      return isLogged && isAdmin ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{ pathname: "/signin", state: { from: props.location } }}
+        />
+      );
     }}
   />
 );
@@ -90,4 +104,11 @@ AdminProtectedRoute.propTypes = {
   location: PropTypes.object,
 };
 
-export default App;
+// export default App;
+export default withTracker(() => {
+  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
+  const userId = Meteor.userId();
+  return {
+    userId,
+  };
+})(App);
