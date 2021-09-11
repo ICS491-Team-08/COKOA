@@ -42,14 +42,10 @@ class EditStuff extends React.Component {
     );
   }
 
-  componentDidUpdate() {
-    console.log(this.props.info);
-  }
-
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     return (
-      <Grid container centered>
+      <Grid centered style={{width: "40rem"}}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
             Edit Stuff
@@ -65,8 +61,7 @@ class EditStuff extends React.Component {
               <SelectField name="condition" />
               <ErrorsField />
               <HiddenField name="owner" />
-            </Segment>
-            <Segment stacked>
+          
               <Form.Group inline="true">
                 <label>Are you vaccinated?</label>
                 <Form.Radio
@@ -100,7 +95,6 @@ class EditStuff extends React.Component {
               />
               <SubmitField value="Submit" />
             </Segment>
-            <SubmitField value="Submit" />
           </AutoForm>
         </Grid.Column>
       </Grid>
