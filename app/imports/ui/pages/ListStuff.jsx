@@ -51,11 +51,11 @@ class ListStuff extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.info && this.props.info._id !== prevProps.info?._id) {
       this.setState({
-        name: this.props.info.name,
-        gender: this.props.info.gender,
-        vaccinated: this.props.info.vaccinated,
-        vaccineType: this.props.info.vaccineType,
-        vaccineLot: this.props.info.vaccineLot,
+        name: this.props.info?.name,
+        gender: this.props.info?.gender,
+        vaccinated: this.props.info?.vaccinated,
+        vaccineType: this.props.info?.vaccineType,
+        vaccineLot: this.props.info?.vaccineLot,
       });
     }
   }
@@ -150,7 +150,7 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const info = Info.collection.find({}).fetch()[0];
+  const info = Info.collection.find({}).fetch()[0] || {};
   return {
     info,
     ready,
