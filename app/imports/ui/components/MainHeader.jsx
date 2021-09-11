@@ -9,7 +9,7 @@ class MainHeader extends React.Component {
         <div className="main-header">
           <div
             style={{
-              paddingLeft: "3rem",
+              paddingLeft: "6rem",
               flexDirection: "row",
               display: "flex",
             }}
@@ -22,7 +22,7 @@ class MainHeader extends React.Component {
           <Header as="h1">My Virtual ID</Header>
           <div
             style={{
-              paddingRight: "3rem",
+              padding: "0rem 6rem",
               display: "flex",
               alignItems: "center",
             }}
