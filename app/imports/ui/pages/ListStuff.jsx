@@ -62,7 +62,7 @@ class ListStuff extends React.Component {
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <div id="signup-page" style={{width: "30rem"}}>
+      <div id="signup-page" style={{width: "40rem"}}>
         <Grid textAlign="center" verticalAlign="middle" centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">

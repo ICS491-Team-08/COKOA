@@ -23,7 +23,7 @@ import Signout from "../pages/Signout";
 import PreLanding from "../pages/PreLanding";
 import { withTracker } from "meteor/react-meteor-data";
 import { Header, Menu } from "semantic-ui-react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 const Left = ({ activeItem, handleItemClick }) => {
   return (
@@ -174,10 +174,12 @@ class App extends React.Component {
         <div>
           {this.props.userId !== null && <MainHeader />}
           <div className="landing-body">
-            <Left
-              activeItem={activeItem}
-              handleItemClick={this.handleItemClick}
-            />
+            {this.props.userId !== null && (
+              <Left
+                activeItem={activeItem}
+                handleItemClick={this.handleItemClick}
+              />
+            )}
             <Switch>
               <Route exact path="/" component={PreLanding} />
               <Route exact path="/home" component={Landing} />
@@ -190,7 +192,7 @@ class App extends React.Component {
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin} />
               <Route component={NotFound} />
             </Switch>
-            <Right />
+            {this.props.userId !== null && <Right />}
           </div>
 
           <Footer />
