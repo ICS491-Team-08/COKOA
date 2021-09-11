@@ -54,9 +54,9 @@ const Center = () => {
       <Card
         style={{
           display: "felx",
-          "flex-direction": "row",
+          flexDirection: "row",
           width: "41rem",
-          "flex-wrap": "wrap",
+          flexWrap: "wrap",
         }}
       >
         <Card.Content>
@@ -68,7 +68,7 @@ const Center = () => {
           <Card.Header>Steve Sanders</Card.Header>
           <Card.Meta>Friends of Elliot</Card.Meta>
         </Card.Content>
-        <Card.Content style={{ width: "27rem", "padding-left": "0rem" }}>
+        <Card.Content style={{ width: "27rem", paddingLeft: "0rem" }}>
           <Card.Header>Virtual ID : H12345678</Card.Header>
           <Card.Meta>Covid-19 Vaccination Record Card</Card.Meta>
           <br />
