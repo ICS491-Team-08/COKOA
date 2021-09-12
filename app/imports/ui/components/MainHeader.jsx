@@ -7,26 +7,14 @@ class MainHeader extends React.Component {
     return (
       <div>
         <div className="main-header">
-          <div
-            style={{
-              paddingLeft: "6rem",
-              flexDirection: "row",
-              display: "flex",
-            }}
-          >
+          <div className="header-right">
             <Image src="https://react.semantic-ui.com/logo.png" size="tiny" />
-            <Header as="h1" style={{ paddingLeft: "1rem" }}>
+            <Header as="h1" className="header-right-name">
               MVID
             </Header>
           </div>
           <Header as="h1">My Virtual ID</Header>
-          <div
-            style={{
-              padding: "0rem 6rem",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+          <div className="header-left">
             {/* <Image
               src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
               size="tiny"

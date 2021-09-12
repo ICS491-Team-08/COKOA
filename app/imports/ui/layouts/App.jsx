@@ -27,7 +27,7 @@ import { NavLink } from "react-router-dom";
 
 const Left = ({ activeItem, handleItemClick }) => {
   return (
-    <div style={{ marginTop: "3rem" }}>
+    <div className="left-nav-menu">
       <Menu vertical>
         <Menu.Item>
           <Menu.Header>Home</Menu.Header>
@@ -120,7 +120,7 @@ const Left = ({ activeItem, handleItemClick }) => {
 
 const Right = (activeItem) => {
   return (
-    <div style={{ marginTop: "3rem", height: "21rem" }}>
+    <div className="right-nav-menu">
       <Menu vertical>
         <Menu.Item
           name="promotions"
