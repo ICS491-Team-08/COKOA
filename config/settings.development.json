@@ -13,6 +13,6 @@
   ],
 
   "defaultUsers": [
-    { "firstName": "Yeji", "lastName": "Han", "gender": "Female", "vaccineType": "Moderna","vaccineLot": 100, "vaccineCard": "https://bloximages.chicago2.vip.townnews.com/greenevillesun.com/content/tncms/assets/v3/editorial/9/f5/9f58c8e7-41c2-58d7-99a8-90bddda28675/60cc8afe6a1e0.image.png", "vaccinated": true, "owner": "hany7@foo.com" }
+    { "firstName": "John", "lastName": "Foo", "gender": "Male", "vaccineType": "Moderna","vaccineLot": 1000, "vaccineCard": "https://bloximages.chicago2.vip.townnews.com/greenevillesun.com/content/tncms/assets/v3/editorial/9/f5/9f58c8e7-41c2-58d7-99a8-90bddda28675/60cc8afe6a1e0.image.png", "vaccinated": true, "owner": "john@foo.com" }
   ]
 }
