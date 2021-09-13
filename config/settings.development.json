@@ -1,7 +1,8 @@
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme" },
+    { "email": "hany7@foo.com", "password": "changeme" }
   ],
 
   "defaultData": [
@@ -9,5 +10,9 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  ],
+
+  "defaultUsers": [
+    { "firstName": "Yeji", "lastName": "Han", "gender": "female", "vaccineType": "Moderna","vaccineLot": 100, "vaccineCard": "https://bloximages.chicago2.vip.townnews.com/greenevillesun.com/content/tncms/assets/v3/editorial/9/f5/9f58c8e7-41c2-58d7-99a8-90bddda28675/60cc8afe6a1e0.image.png", "owner": "hany7@foo.com" }
   ]
 }

@@ -24,6 +24,9 @@ import PreLanding from "../pages/PreLanding";
 import { withTracker } from "meteor/react-meteor-data";
 import { Header, Menu } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import CreateUserProfile from '../pages/CreateUserProfile';
+import UserProfile from '../pages/UserProfile';
+import EditUserProfile from '../pages/EditUserProfile';
 
 const Left = ({ activeItem, handleItemClick }) => {
   return (
@@ -188,7 +191,10 @@ class App extends React.Component {
               <Route path="/signout" component={Signout} />
               <ProtectedRoute path="/list" component={ListStuff} />
               <ProtectedRoute path="/add" component={AddStuff} />
+              <ProtectedRoute path="/createuser" component={CreateUserProfile}/>
+              <ProtectedRoute path="/userprofile" component={UserProfile}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff} />
+              <ProtectedRoute path="/editprofile/:_id" component={EditUserProfile}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin} />
               <Route component={NotFound} />
             </Switch>
