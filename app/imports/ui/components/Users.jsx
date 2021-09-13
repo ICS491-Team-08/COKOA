@@ -2,12 +2,13 @@ import React from "react";
 import { Header, Grid, Segment, Button, Table, Image } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { withRouter, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 /** Renders a card for a user profile. See pages/EditUserProfile.jsx. */
 class Users extends React.Component {
   render() {
     return (
-      <Grid centered={true} style={{width: "40rem"}}>
+      <Grid centered={true} style={{ width: "40rem" }}>
         <Grid.Column style={{ display: "flex", flexDirection: "column" }}>
           <Table>
             <Table.Body>
@@ -66,8 +67,12 @@ class Users extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Segment>
-          <Button style={{ marginTop: "1rem" }}>
-            <Link to={`/editprofile/${this.props.user._id}`}>Edit Profile</Link>
+          <Button
+            as={NavLink}
+            to={`/editprofile/${this.props.user._id}`}
+            style={{ marginTop: "1rem" }}
+          >
+            Edit Profile
           </Button>
         </Grid.Column>
       </Grid>
