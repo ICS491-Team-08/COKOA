@@ -36,6 +36,14 @@ class UserCollection {
         type: 'String',
         optional: true,
       },
+      date: {
+        type: 'String',
+        optional: true,
+      },
+      site:{
+        type: 'String',
+        optional: true,
+      }
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

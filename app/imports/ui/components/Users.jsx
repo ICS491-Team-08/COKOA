@@ -1,28 +1,15 @@
-import React from 'react';
-import { Header, Grid, Segment, Button, Table, Image } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import React from "react";
+import { Header, Grid, Segment, Button, Table, Image } from "semantic-ui-react";
+import PropTypes from "prop-types";
+import { withRouter, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 /** Renders a card for a user profile. See pages/EditUserProfile.jsx. */
 class Users extends React.Component {
-
   render() {
-    const pageStyle = { marginTop: '30px' };
     return (
-      <Grid style={pageStyle} centered={true} columns={2}>
-        <Segment>
-          <Grid.Row>
-            <Grid.Column>
-              <Image src={this.props.user.vaccineCard} size='small' centered={true}/>
-              <br/>
-              <br/>
-              <Button>
-                <Link to={`/editprofile/${this.props.user._id}`}>Edit Profile</Link>
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Segment>
-        <Grid.Column>
+      <Grid centered={true} style={{ width: "40rem" }}>
+        <Grid.Column style={{ display: "flex", flexDirection: "column" }}>
           <Table>
             <Table.Body>
               <Table.Row>
@@ -69,6 +56,24 @@ class Users extends React.Component {
               </Table.Row>
             </Table.Body>
           </Table>
+          <Segment>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  src={this.props.user.vaccineCard}
+                  size="small"
+                  centered={true}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Segment>
+          <Button
+            as={NavLink}
+            to={`/editprofile/${this.props.user._id}`}
+            style={{ marginTop: "1rem" }}
+          >
+            Edit Profile
+          </Button>
         </Grid.Column>
       </Grid>
     );

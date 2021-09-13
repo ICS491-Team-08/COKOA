@@ -1,25 +1,32 @@
-import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader } from 'semantic-ui-react';
-import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
-import Users from '../components/Users';
-import { User } from '../../api/user/User';
+import React from "react";
+import { Meteor } from "meteor/meteor";
+import { Container, Header, Loader } from "semantic-ui-react";
+import { withTracker } from "meteor/react-meteor-data";
+import PropTypes from "prop-types";
+import Users from "../components/Users";
+import { User } from "../../api/user/User";
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class UserProfile extends React.Component {
-
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    return this.props.ready ? (
+      this.renderPage()
+    ) : (
+      <Loader active>Getting data</Loader>
+    );
   }
 
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-        <Container textAlign='center'>
-          <Header as="h2">My Profile</Header>
-          {this.props.users.map((user, index) => <Users key={index} user={user}/>)}
-        </Container>
+      <div className="flex-column">
+        <Header as="h2" style={{ textAlign: "center" }}>
+          My Profile
+        </Header>
+        {this.props.users.map((user, index) => (
+          <Users key={index} user={user} />
+        ))}
+      </div>
     );
   }
 }
