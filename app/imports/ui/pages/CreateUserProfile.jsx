@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import { Grid, Segment, Header, Form, Select } from 'semantic-ui-react';
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
@@ -13,9 +13,22 @@ import { User } from '../../api/user/User';
 const formSchema = new SimpleSchema({
   firstName: String,
   lastName: String,
-  gender: String,
-  vaccineType: String,
-  vaccineLot: Number,
+  gender: {
+    type: String,
+    allowedValues: ['Male', 'Female', '3'],
+  },
+  vaccineType: {
+    type: String,
+    allowedValues: ['Pfizer', 'Moderna', 'Janssen', 'ETC', 'No vaccine'],
+  },
+  vaccineLot: {
+    type: Number,
+    optional: true,
+  },
+  vaccinated: {
+    type: 'Boolean',
+    optional: true,
+  },
   vaccineCard: {
     type: 'String',
     defaultValue: 'https://bloximages.chicago2.vip.townnews.com/greenevillesun.com/content/tncms/assets/v3/editorial/9/f5/9f58c8e7-41c2-58d7-99a8-90bddda28675/60cc8afe6a1e0.image.png',
@@ -33,9 +46,9 @@ class CreateUserProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { firstName, lastName, gender, vaccineType, vaccineLot, vaccineCard } = data;
+    const { firstName, lastName, gender, vaccineType, vaccineLot, vaccinated, vaccineCard } = data;
     const owner = Meteor.user().username;
-    User.collection.insert({ firstName, lastName, gender, vaccineType, vaccineLot, vaccineCard, owner },
+    User.collection.insert({ firstName, lastName, gender, vaccineType, vaccineLot, vaccinated, vaccineCard, owner },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
@@ -64,9 +77,40 @@ class CreateUserProfile extends React.Component {
                 <TextField name='vaccineCard'/>
                 <TextField name='firstName'/>
                 <TextField name='lastName'/>
-                <TextField name='gender'/>
-                <TextField name='vaccineType'/>
-                <TextField name='vaccineLot'/>
+                <Form.Group inline="true">
+                  <label>Are you vaccinated?</label>
+                  <Form.Radio
+                      label="Yes"
+                      value={true}
+                      name="vaccinated"
+                  />
+                  <Form.Radio
+                      label="No"
+                      value={false}
+                      name="vaccinated"
+                  />
+                </Form.Group>
+                <Form.Group widths='equal'>
+                  <SelectField
+                      fluid
+                      label="Gender"
+                      name="gender"
+                      placeholder="Gender"
+                      control={Select}
+                  />
+                  <SelectField
+                      fluid
+                      label="What vaccine did you get?"
+                      name="vaccineType"
+                      placeholder="Vaccine"
+                      control={Select}
+                  />
+                </Form.Group>
+                <TextField
+                    label="What is the lot number? (optional)"
+                    name="vaccineLot"
+                    placeholder="1001-101"
+                />
                 <SubmitField value='Submit'/>
                 <ErrorsField/>
               </Segment>

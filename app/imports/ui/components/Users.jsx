@@ -51,6 +51,12 @@ class Users extends React.Component {
               </Table.Row>
               <Table.Row>
                 <Table.Cell>
+                  <Header as="h5">Vaccinated</Header>
+                </Table.Cell>
+                <Table.Cell>{this.props.user.vaccinated}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
                   <Header as="h5">Vaccine Type</Header>
                 </Table.Cell>
                 <Table.Cell>{this.props.user.vaccineType}</Table.Cell>

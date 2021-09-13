@@ -35,6 +35,14 @@ class MainHeader extends React.Component {
                   exact
                   to="/signout"
                 />
+                <Dropdown.Item
+                    id="navbar-user-profile"
+                    icon="user"
+                    text="My Profile"
+                    as={NavLink}
+                    exact
+                    to="/userprofile"
+                />
               </Dropdown.Menu>
             </Dropdown>
           </div>

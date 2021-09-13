@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Select, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -52,8 +52,22 @@ class EditUserProfile extends React.Component {
               <TextField name='vaccineCard'/>
               <TextField name='firstName'/>
               <TextField name='lastName'/>
-              <TextField name='gender'/>
-              <TextField name='vaccineType'/>
+              <Form.Group widths='equal'>
+                <SelectField
+                    fluid
+                    label="Gender"
+                    name="gender"
+                    placeholder="Gender"
+                    control={Select}
+                />
+                <SelectField
+                    fluid
+                    label="what vaccine did you get?"
+                    name="vaccineType"
+                    placeholder="Vaccine"
+                    control={Select}
+                />
+              </Form.Group>
               <TextField name='vaccineLot'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>

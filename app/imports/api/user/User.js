@@ -15,10 +15,23 @@ class UserCollection {
     this.schema = new SimpleSchema({
       firstName: String,
       lastName: String,
-      gender: String,
-      vaccineType: String,
-      vaccineLot: Number,
+      gender: {
+        type: String,
+        allowedValues: ['Male', 'Female', '3'],
+      },
+      vaccineType: {
+        type: String,
+        allowedValues: ['Pfizer', 'Moderna', 'Janssen', 'ETC', 'No vaccine'],
+      },
+      vaccineLot: {
+        type: Number,
+        optional: true,
+      },
       vaccineCard: String,
+      vaccinated: {
+        type: 'Boolean',
+        optional: true,
+      },
       owner: {
         type: 'String',
         optional: true,
