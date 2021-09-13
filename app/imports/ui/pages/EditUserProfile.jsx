@@ -139,7 +139,7 @@ class EditUserProfile extends React.Component {
                 />
               </Form.Group>
 
-              <SubmitField value="Submit" />
+              <SubmitField value="Submit" style={{ width: "100%" }} />
               <ErrorsField />
               <HiddenField name="owner" />
             </Segment>
