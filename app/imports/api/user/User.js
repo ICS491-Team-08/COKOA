@@ -29,7 +29,7 @@ class UserCollection {
       },
       vaccineCard: String,
       vaccinated: {
-        type: 'Boolean',
+        type: Boolean,
         optional: true,
       },
       owner: {
