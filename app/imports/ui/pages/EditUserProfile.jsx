@@ -1,19 +1,25 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { Grid, Loader, Header, Segment, Select, Form } from 'semantic-ui-react';
-import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, SelectField, SubmitField, TextField } from 'uniforms-semantic';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
-import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { User } from '../../api/user/User';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { Grid, Loader, Header, Segment, Select, Form } from "semantic-ui-react";
+import swal from "sweetalert";
+import {
+  AutoForm,
+  ErrorsField,
+  HiddenField,
+  SelectField,
+  SubmitField,
+  TextField,
+} from "uniforms-semantic";
+import { Meteor } from "meteor/meteor";
+import { withTracker } from "meteor/react-meteor-data";
+import PropTypes from "prop-types";
+import SimpleSchema2Bridge from "uniforms-bridge-simple-schema-2";
+import { User } from "../../api/user/User";
 
 const bridge = new SimpleSchema2Bridge(User.schema);
 
 /** Renders the Page for editing a single document. */
 class EditUserProfile extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = { redirectToReferer: false };
@@ -21,57 +27,121 @@ class EditUserProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { firstName, lastName, gender, vaccineType, vaccineLot, vaccineCard } = data;
-    User.collection.update(this.props.documentId, { $set: { firstName, lastName, gender, vaccineType, vaccineLot, vaccineCard } }, (error) => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'User Profile Updated', 'success');
-        this.setState({ redirectToReferer: true });
+    const {
+      firstName,
+      lastName,
+      gender,
+      vaccineType,
+      vaccineLot,
+      vaccineCard,
+    } = data;
+    User.collection.update(
+      this.props.documentId,
+      {
+        $set: {
+          firstName,
+          lastName,
+          gender,
+          vaccineType,
+          vaccineLot,
+          vaccineCard,
+        },
+      },
+      (error) => {
+        if (error) {
+          swal("Error", error.message, "error");
+        } else {
+          swal("Success", "User Profile Updated", "success");
+          this.setState({ redirectToReferer: true });
+        }
       }
-    });
+    );
   }
 
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    return this.props.ready ? (
+      this.renderPage()
+    ) : (
+      <Loader active>Getting data</Loader>
+    );
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
-    const { from } = this.props.location.state || { from: { pathname: '/userprofile' } };
+    const { from } = this.props.location.state || {
+      from: { pathname: "/userprofile" },
+    };
     // if correct authentication, redirect to page instead of login screen
     if (this.state.redirectToReferer) {
-      return <Redirect to={from}/>;
+      return <Redirect to={from} />;
     }
     return (
-      <Grid container centered>
+      <Grid centered className="edit-profile-container">
         <Grid.Column>
-          <Header as="h2" textAlign="center">Edit Profile</Header>
-          <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
+          <Header as="h2" textAlign="center">
+            Edit Profile
+          </Header>
+          <AutoForm
+            schema={bridge}
+            onSubmit={(data) => this.submit(data)}
+            model={this.props.doc}
+          >
             <Segment>
-              <TextField name='vaccineCard'/>
-              <TextField name='firstName'/>
-              <TextField name='lastName'/>
-              <Form.Group widths='equal'>
+              <TextField name="vaccineCard" />
+              <TextField name="firstName" />
+              <TextField name="lastName" />
+
+              <Header
+                as="h3"
+                style={{ textAlign: "center", padding: "1rem 0rem" }}
+              >
+                1st Dose of Covid-19
+              </Header>
+              <Form.Group widths="equal">
                 <SelectField
-                    fluid
-                    label="Gender"
-                    name="gender"
-                    placeholder="Gender"
-                    control={Select}
+                  fluid
+                  label="Product Name/Manufacturer"
+                  name="vaccineType"
+                  placeholder="Vaccine"
+                  control={Select}
                 />
-                <SelectField
-                    fluid
-                    label="what vaccine did you get?"
-                    name="vaccineType"
-                    placeholder="Vaccine"
-                    control={Select}
+                <TextField name="vaccineLot" />
+              </Form.Group>
+              <Form.Group widths="equal">
+                <TextField name="date" label="Date" />
+                <TextField
+                  name="site"
+                  label="Healthcare Professional or Clinic Site"
                 />
               </Form.Group>
-              <TextField name='vaccineLot'/>
-              <SubmitField value='Submit'/>
-              <ErrorsField/>
-              <HiddenField name='owner' />
+
+              <Header
+                as="h3"
+                style={{ textAlign: "center", padding: "1rem 0rem" }}
+              >
+                2st Dose of Covid-19
+              </Header>
+              <Form.Group widths="equal">
+                <SelectField
+                  fluid
+                  label="Product Name/Manufacturer"
+                  name="vaccineType"
+                  placeholder="Vaccine"
+                  control={Select}
+                />
+                <TextField name="vaccineLot" />
+              </Form.Group>
+              <Form.Group widths="equal">
+                <TextField name="date" label="Date" />
+                <TextField
+                  name="site"
+                  label="Healthcare Professional or Clinic Site"
+                />
+              </Form.Group>
+
+              <SubmitField value="Submit" />
+              <ErrorsField />
+              <HiddenField name="owner" />
             </Segment>
           </AutoForm>
         </Grid.Column>

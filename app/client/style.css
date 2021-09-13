@@ -69,6 +69,10 @@
   top: 3rem;
 }
 
+.edit-profile-container{
+  width: 40rem !important;
+}
+
 @media only screen and (max-device-width: 480px) {
   .left-nav-menu {
     display: none;
