@@ -48,7 +48,11 @@ class UserCollection {
           type: "String",
           optional: true,
         },
-        vaccineCard: String,
+        vaccineCard: {
+          type: "String",
+          defaultValue:
+            "https://bloximages.chicago2.vip.townnews.com/greenevillesun.com/content/tncms/assets/v3/editorial/9/f5/9f58c8e7-41c2-58d7-99a8-90bddda28675/60cc8afe6a1e0.image.png",
+        },
         owner: {
           type: "String",
           optional: true,
