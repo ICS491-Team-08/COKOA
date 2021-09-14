@@ -11,16 +11,16 @@ import {
 } from "react-router-dom";
 import MainHeader from "../components/MainHeader";
 import Footer from "../components/Footer";
-import Landing from "../pages/Landing";
+import Landing from "../pages/Home";
 import ListStuff from "../pages/ListStuff";
 import ListStuffAdmin from "../pages/ListStuffAdmin";
-import AddStuff from "../pages/AddStuff";
+import AddStuff from "../pages/DailyCheckUp";
 import EditStuff from "../pages/EditStuff";
 import NotFound from "../pages/NotFound";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import Signout from "../pages/Signout";
-import PreLanding from "../pages/PreLanding";
+import PreLanding from "../pages/Landing";
 import { withTracker } from "meteor/react-meteor-data";
 import { Header, Menu } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
@@ -185,10 +185,10 @@ class App extends React.Component {
             )}
             <Switch>
               <Route exact path="/" component={PreLanding} />
-              <Route exact path="/home" component={Landing} />
               <Route path="/signin" component={Signin} />
               <Route path="/signup" component={Signup} />
               <Route path="/signout" component={Signout} />
+              <Route exact path="/home/:_id" component={Landing} />
               <ProtectedRoute path="/list" component={ListStuff} />
               <ProtectedRoute path="/add" component={AddStuff} />
               <ProtectedRoute path="/createuser" component={CreateUserProfile}/>
@@ -267,6 +267,7 @@ AdminProtectedRoute.propTypes = {
 export default withTracker(() => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const userId = Meteor.userId();
+  console.log(userId)
   return {
     userId,
   };

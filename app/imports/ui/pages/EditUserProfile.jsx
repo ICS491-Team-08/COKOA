@@ -27,6 +27,7 @@ class EditUserProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
+    console.log(data);
     const {
       firstName,
       lastName,
