@@ -30,9 +30,14 @@ class EditUserProfile extends React.Component {
     const {
       firstName,
       lastName,
-      gender,
-      vaccineType,
-      vaccineLot,
+      firstVaccineType,
+      firstVaccineLot,
+      firstDate,
+      firstSite,
+      secondVaccineType,
+      secondVaccineLot,
+      secondDate,
+      secondSite,
       vaccineCard,
     } = data;
     User.collection.update(
@@ -41,9 +46,14 @@ class EditUserProfile extends React.Component {
         $set: {
           firstName,
           lastName,
-          gender,
-          vaccineType,
-          vaccineLot,
+          firstVaccineType,
+          firstVaccineLot,
+          firstDate,
+          firstSite,
+          secondVaccineType,
+          secondVaccineLot,
+          secondDate,
+          secondSite,
           vaccineCard,
         },
       },
@@ -101,16 +111,16 @@ class EditUserProfile extends React.Component {
                 <SelectField
                   fluid
                   label="Product Name/Manufacturer"
-                  name="vaccineType"
+                  name="firstVaccineType"
                   placeholder="Vaccine"
                   control={Select}
                 />
-                <TextField name="vaccineLot" />
+                <TextField name="firstVaccineLot" />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField name="date" label="Date" />
+                <TextField name="firstDate" label="Date" />
                 <TextField
-                  name="site"
+                  name="firstSite"
                   label="Healthcare Professional or Clinic Site"
                 />
               </Form.Group>
@@ -125,16 +135,16 @@ class EditUserProfile extends React.Component {
                 <SelectField
                   fluid
                   label="Product Name/Manufacturer"
-                  name="vaccineType"
+                  name="secondVaccineType"
                   placeholder="Vaccine"
                   control={Select}
                 />
-                <TextField name="vaccineLot" />
+                <TextField name="secondVaccineLot" />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField name="date" label="Date" />
+                <TextField name="secondDate" label="Date" />
                 <TextField
-                  name="site"
+                  name="secondSite"
                   label="Healthcare Professional or Clinic Site"
                 />
               </Form.Group>
