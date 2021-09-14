@@ -32,7 +32,7 @@ const Left = ({ activeItem, handleItemClick }) => {
   return (
     <div className="left-nav-menu">
       <Menu vertical>
-        <Menu.Item>
+        {/* <Menu.Item>
           <Menu.Header>Home</Menu.Header>
 
           <Menu.Menu>
@@ -50,10 +50,10 @@ const Left = ({ activeItem, handleItemClick }) => {
               onClick={handleItemClick}
             />
           </Menu.Menu>
-        </Menu.Item>
+        </Menu.Item> */}
 
         <Menu.Item>
-          <Menu.Header>Status</Menu.Header>
+          <Menu.Header>Health Status</Menu.Header>
 
           <Menu.Menu>
             <Menu.Item
@@ -64,38 +64,38 @@ const Left = ({ activeItem, handleItemClick }) => {
               exact
               to="/add"
             />
-            <Menu.Item
+            {/* <Menu.Item
               name="History"
               active={activeItem === "History"}
               onClick={handleItemClick}
-            />
+            /> */}
           </Menu.Menu>
         </Menu.Item>
 
         <Menu.Item>
-          <Menu.Header>Information</Menu.Header>
+          <Menu.Header>My Information</Menu.Header>
 
           <Menu.Menu>
             <Menu.Item
-              name="Vaccination Record"
-              active={activeItem === "Vaccination Record"}
+              name="Profile"
+              active={activeItem === "Profile"}
               onClick={handleItemClick}
               as={NavLink}
               exact
-              to="/list"
+              to="/userprofile"
             />
-            <Menu.Item
+            {/* <Menu.Item
               name="Personal Record"
               active={activeItem === "Personal Record"}
               onClick={handleItemClick}
               as={NavLink}
               exact
               to="/edit/:_id"
-            />
+            /> */}
           </Menu.Menu>
         </Menu.Item>
 
-        <Menu.Item>
+        {/* <Menu.Item>
           <Menu.Header>Support</Menu.Header>
 
           <Menu.Menu>
@@ -115,7 +115,7 @@ const Left = ({ activeItem, handleItemClick }) => {
               FAQs
             </Menu.Item>
           </Menu.Menu>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </div>
   );

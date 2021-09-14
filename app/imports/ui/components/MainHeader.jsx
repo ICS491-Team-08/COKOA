@@ -8,18 +8,13 @@ class MainHeader extends React.Component {
       <div>
         <div className="main-header">
           <div className="header-right">
-            <Image src="https://react.semantic-ui.com/logo.png" size="tiny" />
-            <Header as="h1" className="header-right-name">
-              MVID
-            </Header>
+            <Image src="/images/cokoa.png" size="small" as={NavLink} exact to="/home" />
+            {/* <Header as="h1" className="header-right-name">
+              COKOA
+            </Header> */}
           </div>
-          <Header as="h1">My Virtual ID</Header>
+          <Header as="h1">COKOA</Header>
           <div className="header-left">
-            {/* <Image
-              src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
-              size="tiny"
-              circular
-            /> */}
             <Dropdown
               id="navbar-current-user"
               text={this.props.currentUser}
