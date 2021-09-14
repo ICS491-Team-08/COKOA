@@ -35,10 +35,6 @@ class ListStuff extends React.Component {
     this.setState({ gender: e.target.value });
   };
 
-  componentDidMount() {
-    // console.log(this.props);
-  }
-
   submit = () => {
     const { _id } = this.props.info;
     const { gender, vaccinated, vaccineType, vaccineLot } = this.state;
@@ -54,21 +50,20 @@ class ListStuff extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.info && this.props.info._id !== prevProps.info?._id) {
-      console.log("hi");
       this.setState({
-        name: this.props.info.name,
-        gender: this.props.info.gender,
-        vaccinated: this.props.info.vaccinated,
-        vaccineType: this.props.info.vaccineType,
-        vaccineLot: this.props.info.vaccineLot,
+        name: this.props.info?.name,
+        gender: this.props.info?.gender,
+        vaccinated: this.props.info?.vaccinated,
+        vaccineType: this.props.info?.vaccineType,
+        vaccineLot: this.props.info?.vaccineLot,
       });
     }
   }
   // Render the page once subscriptions have been received.
   renderPage() {
     return (
-      <Container id="signup-page">
-        <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
+      <div id="signup-page" style={{width: "40rem"}}>
+        <Grid textAlign="center" verticalAlign="middle" centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">
               Edit my info
@@ -137,7 +132,7 @@ class ListStuff extends React.Component {
             </Form>
           </Grid.Column>
         </Grid>
-      </Container>
+      </div>
     );
   }
 }
@@ -155,7 +150,7 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents
-  const info = Info.collection.find({}).fetch()[0];
+  const info = Info.collection.find({}).fetch()[0] || {};
   return {
     info,
     ready,
