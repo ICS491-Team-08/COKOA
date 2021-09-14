@@ -156,7 +156,7 @@ class CreateUserProfile extends React.Component {
                 <TextField name="firstVaccineLot" />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField name="firstDate" label="Date" />
+                <TextField icon="calendar" name="firstDate" label="Date" placeholder="MM/DD/YY" />
                 <TextField
                   name="firstSite"
                   label="Healthcare Professional or Clinic Site"
@@ -180,7 +180,7 @@ class CreateUserProfile extends React.Component {
                 <TextField name="secondVaccineLot" />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField name="secondDate" label="Date" />
+                <TextField icon="calendar" name="secondDate" label="Date" placeholder="MM/DD/YY" />
                 <TextField
                   name="secondSite"
                   label="Healthcare Professional or Clinic Site"

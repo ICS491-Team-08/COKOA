@@ -28,20 +28,20 @@ class MainHeader extends React.Component {
             >
               <Dropdown.Menu>
                 <Dropdown.Item
-                  id="navbar-sign-out"
-                  icon="sign out"
-                  text="Sign Out"
-                  as={NavLink}
-                  exact
-                  to="/signout"
-                />
-                <Dropdown.Item
                     id="navbar-user-profile"
                     icon="user"
                     text="My Profile"
                     as={NavLink}
                     exact
                     to="/userprofile"
+                />
+                <Dropdown.Item
+                  id="navbar-sign-out"
+                  icon="sign out"
+                  text="Sign Out"
+                  as={NavLink}
+                  exact
+                  to="/signout"
                 />
               </Dropdown.Menu>
             </Dropdown>
