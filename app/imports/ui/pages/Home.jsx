@@ -95,7 +95,7 @@ const Center = () => {
         />
         <Card.Content extra style={{ width: "41rem" }}>
           <Card.Description style={{ color: "red" }}>
-            *Fraudulent of Virtual ID is subjected to a crime of{" "}
+            *Fraudulent of Virtual ID is subjected to a crime of
             <strong> Identity Fraud</strong>
           </Card.Description>
         </Card.Content>
@@ -122,15 +122,10 @@ class Landing extends React.Component {
 // export default Landing;
 
 export default withTracker(({ match }) => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
-  // Get access to Stuff documents.
   const subscription = Meteor.subscribe(User.userPublicationName);
-  // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the document
-  const doc = User.collection.findOne(documentId);
-  console.log(doc);
+  const doc = User.collection.find({}).fetch();
   return {
     doc,
     ready,

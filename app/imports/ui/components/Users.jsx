@@ -130,7 +130,7 @@ class Users extends React.Component {
           </Segment>
           <Button
             as={NavLink}
-            to={`/editprofile/${this.props.user._id}`}
+            to={`/editUserProfile/${this.props.user._id}`}
             style={{ marginTop: "1rem" }}
           >
             Edit Profile

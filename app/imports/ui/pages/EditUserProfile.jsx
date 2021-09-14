@@ -25,48 +25,33 @@ class EditUserProfile extends React.Component {
     this.state = { redirectToReferer: false };
   }
 
-  // On successful submit, insert the data.
-  submit(data) {
-    console.log(data);
-    const {
-      firstName,
-      lastName,
-      firstVaccineType,
-      firstVaccineLot,
-      firstDate,
-      firstSite,
-      secondVaccineType,
-      secondVaccineLot,
-      secondDate,
-      secondSite,
-      vaccineCard,
-    } = data;
-    User.collection.update(
-      this.props.documentId,
-      {
-        $set: {
-          firstName,
-          lastName,
-          firstVaccineType,
-          firstVaccineLot,
-          firstDate,
-          firstSite,
-          secondVaccineType,
-          secondVaccineLot,
-          secondDate,
-          secondSite,
-          vaccineCard,
-        },
-      },
-      (error) => {
+  userUpdate({ id, data }) {
+    if (id === "new") {
+      User.collection.insert(
+        { ...data, owner: Meteor.user().username },
+        (error) => {
+          if (error) {
+            swal("Error", error.message, "error");
+          } else {
+            swal("Success", "User Profile Added Successfully", "success");
+            this.setState({ redirectToReferer: true });
+          }
+        }
+      );
+    } else {
+      User.collection.update(id, { $set: data }, (error) => {
         if (error) {
           swal("Error", error.message, "error");
         } else {
           swal("Success", "User Profile Updated", "success");
           this.setState({ redirectToReferer: true });
         }
-      }
-    );
+      });
+    }
+  }
+  // On successful submit, insert the data.
+  submit(data) {
+    this.userUpdate({ id: this.props.documentId, data });
   }
 
   render() {
@@ -119,7 +104,12 @@ class EditUserProfile extends React.Component {
                 <TextField name="firstVaccineLot" />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField icon="calendar" name="firstDate" label="Date" placeholder="MM/DD/YY" />
+                <TextField
+                  icon="calendar"
+                  name="firstDate"
+                  label="Date"
+                  placeholder="MM/DD/YY"
+                />
                 <TextField
                   name="firstSite"
                   label="Healthcare Professional or Clinic Site"
@@ -143,7 +133,12 @@ class EditUserProfile extends React.Component {
                 <TextField name="secondVaccineLot" />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField icon="calendar" name="secondDate" label="Date" placeholder="MM/DD/YY" />
+                <TextField
+                  icon="calendar"
+                  name="secondDate"
+                  label="Date"
+                  placeholder="MM/DD/YY"
+                />
                 <TextField
                   name="secondSite"
                   label="Healthcare Professional or Clinic Site"
@@ -180,7 +175,6 @@ export default withTracker(({ match }) => {
   const ready = subscription.ready();
   // Get the document
   const doc = User.collection.findOne(documentId);
-  console.log(doc);
   return {
     doc,
     ready,
