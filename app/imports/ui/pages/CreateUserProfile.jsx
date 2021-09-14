@@ -122,7 +122,7 @@ class CreateUserProfile extends React.Component {
       return <Redirect to={from} />;
     }
     return (
-      <Grid container centered className="orangebg">
+      <Grid centered className="orangebg" style={{width: "40rem"}}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
             Create Profile
