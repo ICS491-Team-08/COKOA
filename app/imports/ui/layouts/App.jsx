@@ -11,150 +11,21 @@ import {
 } from "react-router-dom";
 import MainHeader from "../components/MainHeader";
 import Footer from "../components/Footer";
-import Landing from "../pages/Landing";
-import ListStuff from "../pages/ListStuff";
-import ListStuffAdmin from "../pages/ListStuffAdmin";
-import AddStuff from "../pages/AddStuff";
-import EditStuff from "../pages/EditStuff";
+import Landing from "../pages/Home";
+import DailyCheckUp from "../pages/DailyCheckUp";
 import NotFound from "../pages/NotFound";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import Signout from "../pages/Signout";
-import PreLanding from "../pages/PreLanding";
+import PreLanding from "../pages/Landing";
 import { withTracker } from "meteor/react-meteor-data";
 import { Header, Menu } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import CreateUserProfile from '../pages/CreateUserProfile';
-import UserProfile from '../pages/UserProfile';
-import EditUserProfile from '../pages/EditUserProfile';
+import UserProfile from "../pages/UserProfile";
+import EditUserProfile from "../pages/EditUserProfile";
+import LeftMenu from "../components/LeftMenu"
+import RightMenu from "../components/RightMenu"
 
-const Left = ({ activeItem, handleItemClick }) => {
-  return (
-    <div className="left-nav-menu">
-      <Menu vertical>
-        {/* <Menu.Item>
-          <Menu.Header>Home</Menu.Header>
 
-          <Menu.Menu>
-            <Menu.Item
-              name="Virtual ID"
-              active={activeItem === "Virtual ID"}
-              onClick={handleItemClick}
-              as={NavLink}
-              exact
-              to="/home"
-            />
-            <Menu.Item
-              name="Usage"
-              active={activeItem === "Usage"}
-              onClick={handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu.Item> */}
-
-        <Menu.Item>
-          <Menu.Header>Health Status</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="Daily Check Up"
-              active={activeItem === "Daily Check Up"}
-              onClick={handleItemClick}
-              as={NavLink}
-              exact
-              to="/add"
-            />
-            {/* <Menu.Item
-              name="History"
-              active={activeItem === "History"}
-              onClick={handleItemClick}
-            /> */}
-          </Menu.Menu>
-        </Menu.Item>
-
-        <Menu.Item>
-          <Menu.Header>My Information</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="Profile"
-              active={activeItem === "Profile"}
-              onClick={handleItemClick}
-              as={NavLink}
-              exact
-              to="/userprofile"
-            />
-            {/* <Menu.Item
-              name="Personal Record"
-              active={activeItem === "Personal Record"}
-              onClick={handleItemClick}
-              as={NavLink}
-              exact
-              to="/edit/:_id"
-            /> */}
-          </Menu.Menu>
-        </Menu.Item>
-
-        {/* <Menu.Item>
-          <Menu.Header>Support</Menu.Header>
-
-          <Menu.Menu>
-            <Menu.Item
-              name="email"
-              active={activeItem === "email"}
-              onClick={handleItemClick}
-            >
-              E-mail Support
-            </Menu.Item>
-
-            <Menu.Item
-              name="faq"
-              active={activeItem === "faq"}
-              onClick={handleItemClick}
-            >
-              FAQs
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu.Item> */}
-      </Menu>
-    </div>
-  );
-};
-
-const Right = (activeItem) => {
-  return (
-    <div className="right-nav-menu">
-      <Menu vertical>
-        <Menu.Item
-          name="promotions"
-          active={activeItem === "promotions"}
-          onClick={this.handleItemClick}
-        >
-          <Header as="h4">CDC Guidance</Header>
-          <p>Check out CDC Guidance webpage</p>
-        </Menu.Item>
-
-        <Menu.Item
-          name="coupons"
-          active={activeItem === "coupons"}
-          onClick={this.handleItemClick}
-        >
-          <Header as="h4">Hawaii Guidance</Header>
-          <p>Check out Hawaii Guidance webpage</p>
-        </Menu.Item>
-
-        <Menu.Item
-          name="rebates"
-          active={activeItem === "rebates"}
-          onClick={this.handleItemClick}
-        >
-          <Header as="h4">Covid-19 Testing Center</Header>
-          <p>Visit nearest Covid-19 Testing Center</p>
-        </Menu.Item>
-      </Menu>
-    </div>
-  );
-};
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -178,27 +49,27 @@ class App extends React.Component {
           {this.props.userId !== null && <MainHeader />}
           <div className="landing-body">
             {this.props.userId !== null && (
-              <Left
+              <LeftMenu
                 activeItem={activeItem}
                 handleItemClick={this.handleItemClick}
               />
             )}
             <Switch>
               <Route exact path="/" component={PreLanding} />
-              <Route exact path="/home" component={Landing} />
               <Route path="/signin" component={Signin} />
               <Route path="/signup" component={Signup} />
               <Route path="/signout" component={Signout} />
-              <ProtectedRoute path="/list" component={ListStuff} />
-              <ProtectedRoute path="/add" component={AddStuff} />
-              <ProtectedRoute path="/createuser" component={CreateUserProfile}/>
-              <ProtectedRoute path="/userprofile" component={UserProfile}/>
-              <ProtectedRoute path="/edit/:_id" component={EditStuff} />
-              <ProtectedRoute path="/editprofile/:_id" component={EditUserProfile}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin} />
+              <Route exact path="/home" component={Landing} />
+              <ProtectedRoute path="/dailyCheckUp" component={DailyCheckUp} />
+              <ProtectedRoute path="/userprofile" component={UserProfile} />
+              <ProtectedRoute
+                path="/editUserProfile/:_id"
+                component={EditUserProfile}
+              />
+              {/* <AdminProtectedRoute path="/admin" component={ListStuffAdmin} /> */}
               <Route component={NotFound} />
             </Switch>
-            {this.props.userId !== null && <Right />}
+            {this.props.userId !== null && <RightMenu />}
           </div>
 
           <Footer />

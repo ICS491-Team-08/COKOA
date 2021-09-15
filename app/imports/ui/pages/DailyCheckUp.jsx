@@ -9,21 +9,10 @@ import {
   Button,
   Checkbox,
 } from "semantic-ui-react";
-import {
-  AutoForm,
-  ErrorsField,
-  NumField,
-  SelectField,
-  SubmitField,
-  TextField,
-  RadioField,
-} from "uniforms-semantic";
 import swal from "sweetalert";
 import { Meteor } from "meteor/meteor";
-import SimpleSchema2Bridge from "uniforms-bridge-simple-schema-2";
-import SimpleSchema from "simpl-schema";
 import { withTracker } from "meteor/react-meteor-data";
-import { Stuffs, Status } from "../../api/stuff/Stuff";
+import { Status } from "../../api/stuff/Stuff";
 import PropTypes from "prop-types";
 
 // // Create a schema to specify the structure of the data to appear in the form.
@@ -79,7 +68,7 @@ const TableExampleStriped = ({ doc }) => (
 );
 
 /** Renders the Page for adding a document. */
-class AddStuff extends React.Component {
+class DailyCheckUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -166,14 +155,12 @@ class AddStuff extends React.Component {
   }
 }
 
-AddStuff.propTypes = {
+DailyCheckUp.propTypes = {
   doc: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
 export default withTracker(() => {
-  // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const documentId = Meteor.userId();
   // Get access to Stuff documents.
   const subscription = Meteor.subscribe(Status.userPublicationName);
   // Determine if the subscription is ready
@@ -184,4 +171,4 @@ export default withTracker(() => {
     doc,
     ready,
   };
-})(AddStuff);
+})(DailyCheckUp);
