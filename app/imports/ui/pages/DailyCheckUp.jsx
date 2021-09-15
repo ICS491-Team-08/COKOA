@@ -107,7 +107,7 @@ class DailyCheckUp extends React.Component {
   render() {
     const date = new Date();
     return (
-      <Grid centered style={{width: "40rem"}}>
+      <Grid centered className="checkup-container">
         <Grid.Column>
           <Header as="h2" textAlign="center">
             Current Health Status

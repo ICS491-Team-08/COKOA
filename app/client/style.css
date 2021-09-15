@@ -6,8 +6,10 @@
 }
 
 .flex-column {
+  display: flex !important;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .flex-row {
@@ -97,8 +99,20 @@
 .home-card {
   width: 40rem;
 }
-#signin-page, #signup-page {
+#signin-page,
+#signup-page {
   width: 28rem !important;
+}
+.ui.visible.top.overlay.sidebar {
+  overflow-y: visible !important;
+  box-shadow: unset !important;
+}
+.checkup-container {
+  width: 40rem;
+}
+.users-container{
+  margin: unset;
+  width: 40rem;
 }
 @media only screen and (max-device-width: 480px) {
   .left-nav-menu {
@@ -155,10 +169,25 @@
   .home-card {
     width: auto !important;
   }
-  #signin-page, #signup-page {
+  #signin-page,
+  #signup-page {
     width: 100% !important;
   }
-  .horizontal-side-bar{
+  .horizontal-side-bar {
     height: 8.5rem !important;
+  }
+  .main-header-1 {
+    z-index: 5;
+    padding: unset !important;
+    /* overflow-y: visible !important; */
+  }
+  .checkup-container {
+    width: 100%;
+  }
+  .flex-column {
+    width: 100%;
+  }
+  .users-container {
+    width: 100%;
   }
 }

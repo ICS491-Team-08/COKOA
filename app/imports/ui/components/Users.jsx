@@ -18,7 +18,7 @@ class Users extends React.Component {
   }
   render() {
     return (
-      <Grid centered={true} style={{ width: "100%", margin: "unset" }}>
+      <Grid centered={true} className="users-container">
         <Grid.Column style={{ display: "flex", flexDirection: "column" }}>
           <Table>
             <Table.Header>
@@ -58,7 +58,7 @@ class Users extends React.Component {
               />
               <this.RowCell
                 headerText="Date"
-                value={this.props.user.firstDate.toString()}
+                value={this.props.user.firstDate?.toString()}
               />
               <this.RowCell
                 headerText="Healthcare or Clinic Site"

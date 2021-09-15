@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Header,
   Image,
   Divider,
   Dropdown,
@@ -16,65 +15,56 @@ class MainHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
+      activeMainNav: true,
+      activeMenuNav: false,
     };
     this.HorizontalSidebar = this.HorizontalSidebar.bind(this);
-    this.onMenuClick = this.onMenuClick.bind(this);
+    this.activeMain = this.activeMain.bind(this);
+    this.activeMenu = this.activeMenu.bind(this);
+    this.mainHeader = this.mainHeader.bind(this);
   }
-  onMenuClick() {
+  activeMenu() {
     this.setState((prev) => {
-      return { active: !prev.active };
+      return { activeMenuNav: !prev.activeMenuNav };
     });
   }
-  HorizontalSidebar({ visible }) {
+  activeMain() {
+    this.setState((prev) => {
+      return { activeMainNav: !prev.activeMainNav };
+    });
+  }
+  mainHeader({ visible }) {
     return (
       <Sidebar
         as={Segment}
-        animation="push"
+        animation="overlay"
         direction="top"
         visible={visible}
+        className="main-header-1"
+        onHidden={this.activeMenu}
       >
-        <Grid textAlign="center" className="horizontal-side-bar">
-          <Grid.Row columns={3}>
-            <Grid.Column>
-              <Image src="/images/wireframe/media-paragraph.png" />
-              <Button onClick={this.onMenuClick}/>
-              Home
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="/images/wireframe/media-paragraph.png" />
-              Daily Check Up
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="/images/wireframe/media-paragraph.png" />
-              Profile
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Sidebar>
-    );
-  }
-
-  render() {
-    return (
-      <div className="white-bg sticky">
-        <this.HorizontalSidebar visible={this.state.active} />
-        <div className="main-header" style={{display: !this.state.active ? "flex" : "none"}}>
+        <div
+          className="main-header"
+          style={{
+            display: !this.state.active ? "flex" : "none",
+            overflow: "visible",
+          }}
+        >
           <div className="header-right flex-row">
             <Button
               id="right-hamburger"
               icon="big bars"
               as={Button}
-              onClick={this.onMenuClick}
+              onClick={this.activeMain}
             />
           </div>
           <div className="flex-row">
             <Image
               src="/images/cokoa.png"
-              size="small"
               as={NavLink}
               exact
               to="/home"
+              style={{ width: "9rem" }}
             />
             {/* <Header as="h1" className="header-right-name">
               COKOA
@@ -109,6 +99,62 @@ class MainHeader extends React.Component {
             </Dropdown>
           </div>
         </div>
+      </Sidebar>
+    );
+  }
+
+  HorizontalSidebar({ visible }) {
+    return (
+      <Sidebar
+        as={Segment}
+        animation="overlay"
+        direction="top"
+        visible={visible}
+        onHidden={this.activeMain}
+      >
+        <Grid textAlign="center" className="horizontal-side-bar">
+          <Grid.Row columns={3}>
+            <Grid.Column className="flex-column">
+              <Button
+                icon="huge home"
+                style={{ backgroundColor: "white" }}
+                as={NavLink}
+                to="/home"
+                onClick={this.activeMenu}
+              ></Button>
+              Home
+            </Grid.Column>
+            <Grid.Column className="flex-column">
+              <Button
+                icon="huge check circle outline"
+                style={{ backgroundColor: "white" }}
+                as={NavLink}
+                to="/dailyCheckUp"
+                onClick={this.activeMenu}
+              ></Button>
+              Check Up
+            </Grid.Column>
+            <Grid.Column className="flex-column">
+              <Button
+                icon="huge address card outline"
+                style={{ backgroundColor: "white" }}
+                as={NavLink}
+                to="/userprofile"
+                onClick={this.activeMenu}
+              ></Button>
+              Profile
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Sidebar>
+    );
+  }
+
+  render() {
+    return (
+      <div className="white-bg sticky">
+        <this.mainHeader visible={this.state.activeMainNav} />
+        <this.HorizontalSidebar visible={this.state.activeMenuNav} />
         <Divider style={{ margin: "unset" }} />
       </div>
     );
