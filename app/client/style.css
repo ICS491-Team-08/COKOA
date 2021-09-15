@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 8.5rem;
 }
 .prelanding {
   display: flex;
@@ -87,6 +88,7 @@
   top: 0px;
   position: sticky;
   z-index: 3;
+  height: 8.5rem;
 }
 .id-contents {
   width: 27rem;
@@ -134,6 +136,7 @@
   }
   #right-hamburger {
     display: block;
+    background-color: white;
   }
   .edit-profile-container {
     width: 100% !important;
@@ -154,5 +157,8 @@
   }
   #signin-page, #signup-page {
     width: 100% !important;
+  }
+  .horizontal-side-bar{
+    height: 8.5rem !important;
   }
 }

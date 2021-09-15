@@ -4,18 +4,69 @@ import {
   Image,
   Divider,
   Dropdown,
-  Sticky,
   Icon,
+  Segment,
+  Sidebar,
+  Grid,
+  Button,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
 class MainHeader extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: false,
+    };
+    this.HorizontalSidebar = this.HorizontalSidebar.bind(this);
+    this.onMenuClick = this.onMenuClick.bind(this);
+  }
+  onMenuClick() {
+    this.setState((prev) => {
+      return { active: !prev.active };
+    });
+  }
+  HorizontalSidebar({ visible }) {
+    return (
+      <Sidebar
+        as={Segment}
+        animation="push"
+        direction="top"
+        visible={visible}
+      >
+        <Grid textAlign="center" className="horizontal-side-bar">
+          <Grid.Row columns={3}>
+            <Grid.Column>
+              <Image src="/images/wireframe/media-paragraph.png" />
+              <Button onClick={this.onMenuClick}/>
+              Home
+            </Grid.Column>
+            <Grid.Column>
+              <Image src="/images/wireframe/media-paragraph.png" />
+              Daily Check Up
+            </Grid.Column>
+            <Grid.Column>
+              <Image src="/images/wireframe/media-paragraph.png" />
+              Profile
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Sidebar>
+    );
+  }
+
   render() {
     return (
       <div className="white-bg sticky">
-        <div className="main-header">
+        <this.HorizontalSidebar visible={this.state.active} />
+        <div className="main-header" style={{display: !this.state.active ? "flex" : "none"}}>
           <div className="header-right flex-row">
-            <Icon id="right-hamburger" name="big bars"></Icon>
+            <Button
+              id="right-hamburger"
+              icon="big bars"
+              as={Button}
+              onClick={this.onMenuClick}
+            />
           </div>
           <div className="flex-row">
             <Image
