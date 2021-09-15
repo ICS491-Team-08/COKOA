@@ -9,6 +9,7 @@ import {
   SelectField,
   SubmitField,
   TextField,
+  DateField,
 } from "uniforms-semantic";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
@@ -70,7 +71,7 @@ class EditUserProfile extends React.Component {
     if (mode === "form") {
       if (model.firstVaccineType === "No vaccine") {
         model.firstVaccineLot = "";
-        model.firstDate = "";
+        model.firstDate = null;
         model.firstSite = "";
         this.state.firstVaccineType !== model.firstVaccineType &&
           this.setState({ firstVaccineType: "No vaccine" });
@@ -80,7 +81,7 @@ class EditUserProfile extends React.Component {
 
       if (model.secondVaccineType === "No vaccine") {
         model.secondVaccineLot = "";
-        model.secondDate = "";
+        model.secondDate = null;
         model.secondSite = "";
         this.state.secondVaccineType !== model.secondVaccineType &&
           this.setState({ secondVaccineType: "No vaccine" });
@@ -152,12 +153,13 @@ class EditUserProfile extends React.Component {
                 />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField
-                  icon="calendar"
+                <DateField
                   name="firstDate"
                   label="Date"
-                  placeholder="MM/DD/YY"
                   disabled={this.disableFirstField()}
+                  max={new Date(2100, 1, 1)}
+                  min={new Date(2000, 1, 1)}
+                  timeFormat="ampm"
                 />
                 <TextField
                   name="firstSite"
@@ -186,12 +188,13 @@ class EditUserProfile extends React.Component {
                 />
               </Form.Group>
               <Form.Group widths="equal">
-                <TextField
-                  icon="calendar"
+                <DateField
                   name="secondDate"
                   label="Date"
-                  placeholder="MM/DD/YY"
                   disabled={this.disableSecondField()}
+                  max={new Date(2100, 1, 1)}
+                  min={new Date(2000, 1, 1)}
+                  timeFormat="ampm"
                 />
                 <TextField
                   name="secondSite"

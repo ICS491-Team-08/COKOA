@@ -58,7 +58,7 @@ class Users extends React.Component {
               />
               <this.RowCell
                 headerText="Date"
-                value={this.props.user.firstDate}
+                value={this.props.user.firstDate.toString()}
               />
               <this.RowCell
                 headerText="Healthcare or Clinic Site"
@@ -86,7 +86,7 @@ class Users extends React.Component {
               />
               <this.RowCell
                 headerText="Date"
-                value={this.props.user.secondDate}
+                value={this.props.user.secondDate?.toString()}
               />
               <this.RowCell
                 headerText="Healthcare or Clinic Site"
