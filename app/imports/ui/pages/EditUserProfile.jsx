@@ -22,7 +22,10 @@ const bridge = new SimpleSchema2Bridge(User.schema);
 class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { redirectToReferer: false };
+    this.state = { redirectToReferer: false, firstVaccineType: "" };
+    this.modelTransform = this.modelTransform.bind(this);
+    this.disableFirstField = this.disableFirstField.bind(this);
+    this.disableSecondField = this.disableSecondField.bind(this);
   }
 
   userUpdate({ id, data }) {
@@ -54,12 +57,53 @@ class EditUserProfile extends React.Component {
     this.userUpdate({ id: this.props.documentId, data });
   }
 
+  componentDidUpdate(prev) {
+    if (prev.doc?.firstVaccineType !== this.props.doc?.firstVaccineType) {
+      this.setState({ firstVaccineType: this.props.doc.firstVaccineType });
+    }
+    if (prev.doc?.secondVaccineType !== this.props.doc?.secondVaccineType) {
+      this.setState({ secondVaccineType: this.props.doc.secondVaccineType });
+    }
+  }
+
+  modelTransform(mode, model) {
+    if (mode === "form") {
+      if (model.firstVaccineType === "No vaccine") {
+        model.firstVaccineLot = "";
+        model.firstDate = "";
+        model.firstSite = "";
+        this.state.firstVaccineType !== model.firstVaccineType &&
+          this.setState({ firstVaccineType: "No vaccine" });
+      } else if (this.state.firstVaccineType === "No vaccine") {
+        this.setState({ firstVaccineType: "" });
+      }
+
+      if (model.secondVaccineType === "No vaccine") {
+        model.secondVaccineLot = "";
+        model.secondDate = "";
+        model.secondSite = "";
+        this.state.secondVaccineType !== model.secondVaccineType &&
+          this.setState({ secondVaccineType: "No vaccine" });
+      } else if (this.state.secondVaccineType === "No vaccine") {
+        this.setState({ secondVaccineType: "" });
+      }
+    }
+    return model;
+  }
+
   render() {
     return this.props.ready ? (
       this.renderPage()
     ) : (
       <Loader active>Getting data</Loader>
     );
+  }
+
+  disableFirstField() {
+    return this.state.firstVaccineType === "No vaccine" ? true : false;
+  }
+  disableSecondField() {
+    return this.state.secondVaccineType === "No vaccine" ? true : false;
   }
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
@@ -81,6 +125,7 @@ class EditUserProfile extends React.Component {
             schema={bridge}
             onSubmit={(data) => this.submit(data)}
             model={this.props.doc}
+            modelTransform={this.modelTransform}
           >
             <Segment>
               <TextField name="vaccineCard" />
@@ -98,10 +143,13 @@ class EditUserProfile extends React.Component {
                   fluid
                   label="Product Name/Manufacturer"
                   name="firstVaccineType"
-                  placeholder="Vaccine"
+                  placeholder="Vaccine Type"
                   control={Select}
                 />
-                <TextField name="firstVaccineLot" />
+                <TextField
+                  name="firstVaccineLot"
+                  disabled={this.disableFirstField()}
+                />
               </Form.Group>
               <Form.Group widths="equal">
                 <TextField
@@ -109,10 +157,12 @@ class EditUserProfile extends React.Component {
                   name="firstDate"
                   label="Date"
                   placeholder="MM/DD/YY"
+                  disabled={this.disableFirstField()}
                 />
                 <TextField
                   name="firstSite"
                   label="Healthcare Professional or Clinic Site"
+                  disabled={this.disableFirstField()}
                 />
               </Form.Group>
 
@@ -130,7 +180,10 @@ class EditUserProfile extends React.Component {
                   placeholder="Vaccine"
                   control={Select}
                 />
-                <TextField name="secondVaccineLot" />
+                <TextField
+                  name="secondVaccineLot"
+                  disabled={this.disableSecondField()}
+                />
               </Form.Group>
               <Form.Group widths="equal">
                 <TextField
@@ -138,10 +191,12 @@ class EditUserProfile extends React.Component {
                   name="secondDate"
                   label="Date"
                   placeholder="MM/DD/YY"
+                  disabled={this.disableSecondField()}
                 />
                 <TextField
                   name="secondSite"
                   label="Healthcare Professional or Clinic Site"
+                  disabled={this.disableSecondField()}
                 />
               </Form.Group>
 
