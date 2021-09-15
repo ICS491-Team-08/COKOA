@@ -18,7 +18,7 @@ class Users extends React.Component {
   }
   render() {
     return (
-      <Grid centered={true} style={{ width: "40rem" }}>
+      <Grid centered={true} style={{ width: "100%", margin: "unset" }}>
         <Grid.Column style={{ display: "flex", flexDirection: "column" }}>
           <Table>
             <Table.Header>
