@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import { withTracker } from "meteor/react-meteor-data";
 import { User } from "../../api/user/User";
+import { Redirect } from "react-router";
 
 const Body = () => {
   return (
@@ -111,10 +112,12 @@ const Center = () => {
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
-    return (
+    return this.props.userId ? (
       <div className="landing-body">
         <Center />
       </div>
+    ) : (
+      <Redirect to={{ pathname: "/" }} />
     );
   }
 }
@@ -126,9 +129,11 @@ export default withTracker(({ match }) => {
   const subscription = Meteor.subscribe(User.userPublicationName);
   const ready = subscription.ready();
   const doc = User.collection.find({}).fetch();
+  const userId = Meteor.userId();
   return {
     doc,
     ready,
     documentId,
+    userId,
   };
 })(Landing);

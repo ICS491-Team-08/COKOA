@@ -1,19 +1,35 @@
 import React from "react";
-import { Header, Image, Divider, Dropdown } from "semantic-ui-react";
+import {
+  Header,
+  Image,
+  Divider,
+  Dropdown,
+  Sticky,
+  Icon,
+} from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
 class MainHeader extends React.Component {
   render() {
     return (
-      <div>
+      <div className="white-bg sticky">
         <div className="main-header">
-          <div className="header-right">
-            <Image src="/images/cokoa.png" size="small" as={NavLink} exact to="/home" />
+          <div className="header-right flex-row">
+            <Icon id="right-hamburger" name="big bars"></Icon>
+          </div>
+          <div className="flex-row">
+            <Image
+              src="/images/cokoa.png"
+              size="small"
+              as={NavLink}
+              exact
+              to="/home"
+            />
             {/* <Header as="h1" className="header-right-name">
               COKOA
             </Header> */}
           </div>
-          <Header as="h1">COKOA</Header>
+
           <div className="header-left">
             <Dropdown
               id="navbar-current-user"
@@ -23,12 +39,12 @@ class MainHeader extends React.Component {
             >
               <Dropdown.Menu>
                 <Dropdown.Item
-                    id="navbar-user-profile"
-                    icon="user"
-                    text="My Profile"
-                    as={NavLink}
-                    exact
-                    to="/userprofile"
+                  id="navbar-user-profile"
+                  icon="user"
+                  text="My Profile"
+                  as={NavLink}
+                  exact
+                  to="/userprofile"
                 />
                 <Dropdown.Item
                   id="navbar-sign-out"
@@ -42,7 +58,7 @@ class MainHeader extends React.Component {
             </Dropdown>
           </div>
         </div>
-        <Divider />
+        <Divider style={{ margin: "unset" }} />
       </div>
     );
   }
