@@ -168,6 +168,7 @@
   }
   .home-card {
     width: auto !important;
+    align-items: unset;
   }
   #signin-page,
   #signup-page {
@@ -193,5 +194,8 @@
   }
   .visible.transition{
     width: 100% !important;
+  }
+  .action-body{
+    align-self: center;
   }
 }

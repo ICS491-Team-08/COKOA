@@ -109,7 +109,7 @@ const Center = () => {
           </Card.Description>
         </Card.Content>
       </Card>
-      <Header as="h1">Action Required</Header>
+      <Header as="h1" style={{textAlign: "center"}}>Action Required</Header>
       <Divider style={{ width: "100%" }} />
       <br />
       <Body />
