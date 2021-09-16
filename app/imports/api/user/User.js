@@ -25,7 +25,7 @@ class UserCollection {
           optional: true,
         },
         firstDate: {
-          type: "String",
+          type: Date,
           optional: true,
         },
         firstSite: {

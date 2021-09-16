@@ -6,10 +6,18 @@
 }
 
 .flex-column {
+  display: flex !important;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .landing-body {
   display: flex;
   flex-direction: row;
@@ -20,14 +28,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 1rem;
+  height: 8.5rem;
 }
 .prelanding {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin: 4rem 0rem;
+  margin: 1rem;
 }
 
 .left-nav-menu {
@@ -45,7 +53,7 @@
   align-items: center;
 }
 .header-right {
-  padding-left: 6rem;
+  padding: 0rem 6rem;
   flex-direction: row;
   display: flex;
 }
@@ -53,6 +61,7 @@
   padding-left: 1rem !important;
 }
 .action-body {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -68,10 +77,43 @@
   top: 3rem;
 }
 
-.edit-profile-container{
+.edit-profile-container {
   width: 40rem !important;
 }
-
+#right-hamburger {
+  display: none;
+}
+.white-bg {
+  background-color: white;
+}
+.sticky {
+  top: 0px;
+  position: sticky;
+  z-index: 3;
+  height: 8.5rem;
+}
+.id-contents {
+  width: 27rem;
+  padding-left: 0rem;
+}
+.home-card {
+  width: 40rem;
+}
+#signin-page,
+#signup-page {
+  width: 28rem !important;
+}
+.ui.visible.top.overlay.sidebar {
+  overflow-y: visible !important;
+  box-shadow: unset !important;
+}
+.checkup-container {
+  width: 40rem;
+}
+.users-container{
+  margin: unset;
+  width: 40rem;
+}
 @media only screen and (max-device-width: 480px) {
   .left-nav-menu {
     display: none;
@@ -81,12 +123,12 @@
     display: none;
   }
   .header-left {
-    padding: unset;
+    padding: 0rem 2rem;
     display: flex;
     align-items: center;
   }
   .header-right {
-    padding-left: unset;
+    padding: 0rem 2rem;
     flex-direction: row;
     display: flex;
   }
@@ -97,12 +139,66 @@
     position: absolute !important;
     right: 0.5rem;
     top: 4rem;
-    width:8rem !important;
+    width: 8rem !important;
   }
   .virtual-id {
-  display: flex !important;
-  flex-direction: row !important;
-  width: 21rem !important;
-  flex-wrap: wrap !important;
-}
+    display: flex !important;
+    flex-direction: row !important;
+    width: auto !important;
+    flex-wrap: wrap !important;
+    margin: 1rem !important;
+  }
+  #right-hamburger {
+    display: block;
+    background-color: white;
+  }
+  .edit-profile-container {
+    width: 100% !important;
+  }
+  .landing-body {
+    width: 100%;
+  }
+  .profile-pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-header {
+    text-align: center;
+  }
+  .home-card {
+    width: auto !important;
+    align-items: unset;
+  }
+  #signin-page,
+  #signup-page {
+    width: 100% !important;
+  }
+  .horizontal-side-bar {
+    height: 8.5rem !important;
+  }
+  .main-header-1 {
+    z-index: 5;
+    padding: unset !important;
+    /* overflow-y: visible !important; */
+  }
+  .checkup-container {
+    width: 100%;
+    margin: 0rem !important;
+  }
+  .flex-column {
+    width: 100%;
+  }
+  .users-container {
+    width: 100%;
+  }
+  .visible.transition{
+    width: 100% !important;
+  }
+  .action-body{
+    align-self: center;
+  }
+  .or-divider{
+    display: none !important;
+  }
 }

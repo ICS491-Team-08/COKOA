@@ -43,7 +43,7 @@ export default class Signin extends React.Component {
     // Otherwise return the Login form.
     return (
       <Container id="signin-page">
-        <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
+        <Grid textAlign="center" verticalAlign="middle" centered>
           <Grid.Column>
             <Header as="h2" textAlign="center">
               Login to your account

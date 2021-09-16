@@ -1,47 +1,41 @@
 import React from "react";
-import {
-  Header,
-  Grid,
-  Segment,
-  Button,
-  Table,
-  Image,
-} from "semantic-ui-react";
+import { Header, Grid, Segment, Button, Table, Image } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { withRouter, Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 /** Renders a card for a user profile. See pages/EditUserProfile.jsx. */
 class Users extends React.Component {
+  RowCell({ headerText, value }) {
+    return value ? (
+      <Table.Row>
+        <Table.Cell width="eight">
+          <Header as="h5">{headerText}</Header>
+        </Table.Cell>
+        <Table.Cell>{value}</Table.Cell>
+      </Table.Row>
+    ) : null;
+  }
   render() {
     return (
-      <Grid centered={true} style={{ width: "40rem" }}>
+      <Grid centered={true} className="users-container">
         <Grid.Column style={{ display: "flex", flexDirection: "column" }}>
           <Table>
             <Table.Header>
-              <Table.Row textAlign='center'>
+              <Table.Row textAlign="center">
                 <Table.HeaderCell colSpan="2">User Info</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              <Table.Row>
-                <Table.Cell width="eight">
-                  <Header as="h5">First Name</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.firstName}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Last Name</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.lastName}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Email</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.owner}</Table.Cell>
-              </Table.Row>
+              <this.RowCell
+                headerText="First Name"
+                value={this.props.user.firstName}
+              />
+              <this.RowCell
+                headerText="Last Name"
+                value={this.props.user.lastName}
+              />
+              <this.RowCell headerText="Email" value={this.props.user.owner} />
             </Table.Body>
           </Table>
 
@@ -54,30 +48,22 @@ class Users extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              <Table.Row>
-                <Table.Cell width="eight">
-                  <Header as="h5">Vaccine Type</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.firstVaccineType}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Vaccine Lot</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.firstVaccineLot}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Date</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.firstDate}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Healthcare or Clinic Site</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.firstSite}</Table.Cell>
-              </Table.Row>
+              <this.RowCell
+                headerText="Vaccine Type"
+                value={this.props.user.firstVaccineType}
+              />
+              <this.RowCell
+                headerText="Vaccine Lot"
+                value={this.props.user.firstVaccineLot}
+              />
+              <this.RowCell
+                headerText="Date"
+                value={this.props.user.firstDate?.toString()}
+              />
+              <this.RowCell
+                headerText="Healthcare or Clinic Site"
+                value={this.props.user.firstSite}
+              />
             </Table.Body>
           </Table>
 
@@ -90,30 +76,22 @@ class Users extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              <Table.Row>
-                <Table.Cell width="eight">
-                  <Header as="h5">Vaccine Type</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.secondVaccineType}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Vaccine Lot</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.secondVaccineLot}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Date</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.secondDate}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>
-                  <Header as="h5">Healthcare or Clinic Site</Header>
-                </Table.Cell>
-                <Table.Cell>{this.props.user.secondSite}</Table.Cell>
-              </Table.Row>
+              <this.RowCell
+                headerText="Vaccine Type"
+                value={this.props.user.secondVaccineType}
+              />
+              <this.RowCell
+                headerText="Vaccine Lot"
+                value={this.props.user.secondVaccineLot}
+              />
+              <this.RowCell
+                headerText="Date"
+                value={this.props.user.secondDate?.toString()}
+              />
+              <this.RowCell
+                headerText="Healthcare or Clinic Site"
+                value={this.props.user.secondSite}
+              />
             </Table.Body>
           </Table>
 
