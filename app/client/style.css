@@ -198,4 +198,7 @@
   .action-body{
     align-self: center;
   }
+  .or-divider{
+    display: none !important;
+  }
 }

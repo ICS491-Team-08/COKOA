@@ -15,7 +15,7 @@ import { withTracker } from "meteor/react-meteor-data";
 
 /** Render a Not Found page if the user enters a URL that doesn't match any route. */
 class PreLanding extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     console.log(this.props.userId);
   }
   render() {
@@ -25,17 +25,17 @@ class PreLanding extends React.Component {
       <div className="prelanding">
         <Segment>
           <div className="prelanding" style={{ margin: "2rem 0rem" }}>
-            <Image
-              src="https://react.semantic-ui.com/logo.png"
-              size="small"
-              circular
-            />
+            <Image src="/images/cokoa.png" size="big" circular />
           </div>
-          <Header as="h1">Welcome to Virtual ID for Covid-19</Header>
+          <Header as="h1" style={{ textAlign: "center" }}>
+            Welcome to COKOA!
+          </Header>
           <br />
           <Segment placeholder style={{ border: "unset" }}>
             <Grid columns={2} stackable textAlign="center">
-              <Divider vertical>Or</Divider>
+              <Divider vertical className="or-divider">
+                Or
+              </Divider>
 
               <Grid.Row verticalAlign="middle">
                 <Grid.Column>
@@ -68,6 +68,6 @@ class PreLanding extends React.Component {
 export default withTracker(({ match }) => {
   const userId = Meteor.userId();
   return {
-    userId
+    userId,
   };
-})(PreLanding)
+})(PreLanding);
