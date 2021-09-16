@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import { withTracker } from "meteor/react-meteor-data";
 import { User } from "../../api/user/User";
+import AnimationWraper from "../components/AnimationWraper";
 import { Redirect } from "react-router";
 
 const Body = () => {
@@ -118,10 +119,15 @@ const Center = () => {
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return this.props.userId ? (
       <div className="landing-body">
-        <Center />
+        <AnimationWraper visible={this.props.ready}>
+            <Center />
+        </AnimationWraper>
       </div>
     ) : (
       <Redirect to={{ pathname: "/" }} />

@@ -14,6 +14,7 @@ import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
 import { Status } from "../../api/stuff/Stuff";
 import PropTypes from "prop-types";
+import AnimationWraper from "../components/AnimationWraper";
 
 // // Create a schema to specify the structure of the data to appear in the form.
 // const formSchema = new SimpleSchema({
@@ -107,50 +108,52 @@ class DailyCheckUp extends React.Component {
   render() {
     const date = new Date();
     return (
-      <Grid centered className="checkup-container">
-        <Grid.Column>
-          <Header as="h2" textAlign="center">
-            Current Health Status
-          </Header>
-          <Segment>
-            <Form>
-              <Form.Field>
-                <label>Date</label>
-                <input value={date.toLocaleString()} disabled />
-              </Form.Field>
-              <Form.Field>
-                <label>Location</label>
-                <input
-                  placeholder="Location"
-                  value={this.state.location}
-                  onChange={this.locationOnChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>Mood</label>
-                <Rating
-                  maxRating={5}
-                  defaultRating={5}
-                  icon="star"
-                  size="huge"
-                  onRate={this.handleRate}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Checkbox
-                  label="I feel sick today. I need to rest."
-                  checked={this.state.sick}
-                  onChange={this.checkboxHandler}
-                />
-              </Form.Field>
-              <Button type="submit" onClick={this.submit}>
-                Submit
-              </Button>
-            </Form>
-          </Segment>
-          <TableExampleStriped doc={this.props.doc} />
-        </Grid.Column>
-      </Grid>
+      <AnimationWraper visible={this.props.ready}>
+        <Grid centered className="checkup-container">
+          <Grid.Column>
+            <Header as="h2" textAlign="center">
+              Current Health Status
+            </Header>
+            <Segment>
+              <Form>
+                <Form.Field>
+                  <label>Date</label>
+                  <input value={date.toLocaleString()} disabled />
+                </Form.Field>
+                <Form.Field>
+                  <label>Location</label>
+                  <input
+                    placeholder="Location"
+                    value={this.state.location}
+                    onChange={this.locationOnChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Mood</label>
+                  <Rating
+                    maxRating={5}
+                    defaultRating={5}
+                    icon="star"
+                    size="huge"
+                    onRate={this.handleRate}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Checkbox
+                    label="I feel sick today. I need to rest."
+                    checked={this.state.sick}
+                    onChange={this.checkboxHandler}
+                  />
+                </Form.Field>
+                <Button type="submit" onClick={this.submit}>
+                  Submit
+                </Button>
+              </Form>
+            </Segment>
+            <TableExampleStriped doc={this.props.doc} />
+          </Grid.Column>
+        </Grid>
+      </AnimationWraper>
     );
   }
 }

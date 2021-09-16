@@ -183,11 +183,15 @@
   }
   .checkup-container {
     width: 100%;
+    margin: 0rem !important;
   }
   .flex-column {
     width: 100%;
   }
   .users-container {
     width: 100%;
+  }
+  .visible.transition{
+    width: 100% !important;
   }
 }
