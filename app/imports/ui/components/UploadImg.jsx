@@ -108,7 +108,7 @@ class UploadImg extends React.Component {
           ref={this.inputRef}
         />
         <a href="#" id="fileSelect">
-          Select some files
+          Upload Vaccination Record Card File.
         </a>
         <div id="fileList">
           <p>No files selected!</p>
