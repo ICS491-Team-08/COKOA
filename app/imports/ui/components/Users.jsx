@@ -6,6 +6,26 @@ import { NavLink } from "react-router-dom";
 
 /** Renders a card for a user profile. See pages/EditUserProfile.jsx. */
 class Users extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      img: null,
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/test", {
+      method: "POST",
+      body: JSON.stringify({
+        type: "getUriForGet",
+        params: {
+          key: this.props.user._id + this.props.user.imgType,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => this.setState({ img: res }));
+  }
   RowCell({ headerText, value }) {
     return value ? (
       <Table.Row>
@@ -98,11 +118,7 @@ class Users extends React.Component {
           <Segment>
             <Grid.Row>
               <Grid.Column>
-                <Image
-                  src={this.props.user.vaccineCard}
-                  size="small"
-                  centered={true}
-                />
+                <Image src={this.state.img} size="small" centered={true} />
               </Grid.Column>
             </Grid.Row>
           </Segment>

@@ -16,7 +16,6 @@ import { withTracker } from "meteor/react-meteor-data";
 /** Render a Not Found page if the user enters a URL that doesn't match any route. */
 class PreLanding extends React.Component {
   componentDidMount() {
-    console.log(this.props.userId);
   }
   render() {
     return this.props.userId ? (

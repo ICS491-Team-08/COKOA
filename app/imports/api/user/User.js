@@ -57,6 +57,10 @@ class UserCollection {
           type: "String",
           optional: true,
         },
+        imgType:{
+          type: "String",
+          optional: true,
+        }
       },
       { tracker: Tracker }
     );
