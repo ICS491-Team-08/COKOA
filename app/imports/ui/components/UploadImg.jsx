@@ -62,7 +62,7 @@ class UploadImg extends React.Component {
         // console.log(this.files[0]);
         ref.current = type;
         fetch(
-          "https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/test",
+          "https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/s3",
           {
             method: "POST",
             mode: "cors",

@@ -1,6 +1,14 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Grid, Loader, Header, Segment, Select, Form, Image } from "semantic-ui-react";
+import {
+  Grid,
+  Loader,
+  Header,
+  Segment,
+  Select,
+  Form,
+  Image,
+} from "semantic-ui-react";
 import swal from "sweetalert";
 import {
   AutoForm,
@@ -35,7 +43,11 @@ class EditUserProfile extends React.Component {
     const type = this.imgType.current.imgTypeRef.current;
     if (id === "new") {
       User.collection.insert(
-        { ...data, owner: Meteor.user().username, imgType: type },
+        {
+          ...data,
+          owner: Meteor.user().username,
+          imgType: type ? type : data.imgType,
+        },
         (error) => {
           if (error) {
             swal("Error", error.message, "error");
@@ -46,14 +58,18 @@ class EditUserProfile extends React.Component {
         }
       );
     } else {
-      User.collection.update(id, { $set: {...data, imgType: type} }, (error) => {
-        if (error) {
-          swal("Error", error.message, "error");
-        } else {
-          swal("Success", "User Profile Updated", "success");
-          this.setState({ redirectToReferer: true });
+      User.collection.update(
+        id,
+        { $set: { ...data, imgType: type ? type : data.imgType } },
+        (error) => {
+          if (error) {
+            swal("Error", error.message, "error");
+          } else {
+            swal("Success", "User Profile Updated", "success");
+            this.setState({ redirectToReferer: true });
+          }
         }
-      });
+      );
     }
   }
   // On successful submit, insert the data.
@@ -206,11 +222,10 @@ class EditUserProfile extends React.Component {
                 />
               </Form.Group>
 
-              <UploadImg id={this.props.documentId} ref={this.imgType}/>
+              <UploadImg id={this.props.documentId} ref={this.imgType} />
               <SubmitField value="Submit" style={{ width: "100%" }} />
               <ErrorsField />
               <HiddenField name="owner" />
-              
             </Segment>
           </AutoForm>
         </Grid.Column>
