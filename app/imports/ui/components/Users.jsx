@@ -14,17 +14,21 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    fetch("https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/s3", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "getUriForGet",
-        params: {
-          key: this.props.user._id + this.props.user.imgType,
-        },
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => this.setState({ img: res }));
+    if (this.props.user.imgType) {
+      fetch("https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/s3", {
+        method: "POST",
+        body: JSON.stringify({
+          type: "getUriForGet",
+          params: {
+            key: this.props.user._id + this.props.user.imgType,
+          },
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => this.setState({ img: res }));
+    }else{
+      this.setState({img: this.props.user.vaccineCard})
+    }
   }
   RowCell({ headerText, value }) {
     return value ? (
