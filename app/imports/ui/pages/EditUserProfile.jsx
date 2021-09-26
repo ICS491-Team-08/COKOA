@@ -1,6 +1,14 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Grid, Loader, Header, Segment, Select, Form } from "semantic-ui-react";
+import {
+  Grid,
+  Loader,
+  Header,
+  Segment,
+  Select,
+  Form,
+  Image,
+} from "semantic-ui-react";
 import swal from "sweetalert";
 import {
   AutoForm,
@@ -16,6 +24,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import SimpleSchema2Bridge from "uniforms-bridge-simple-schema-2";
 import { User } from "../../api/user/User";
+import UploadImg from "../components/UploadImg";
 
 const bridge = new SimpleSchema2Bridge(User.schema);
 
@@ -24,15 +33,21 @@ class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { redirectToReferer: false, firstVaccineType: "" };
+    this.imgType = React.createRef("");
     this.modelTransform = this.modelTransform.bind(this);
     this.disableFirstField = this.disableFirstField.bind(this);
     this.disableSecondField = this.disableSecondField.bind(this);
   }
 
   userUpdate({ id, data }) {
+    const type = this.imgType.current.imgTypeRef.current;
     if (id === "new") {
       User.collection.insert(
-        { ...data, owner: Meteor.user().username },
+        {
+          ...data,
+          owner: Meteor.user().username,
+          imgType: type ? type : data.imgType,
+        },
         (error) => {
           if (error) {
             swal("Error", error.message, "error");
@@ -43,14 +58,18 @@ class EditUserProfile extends React.Component {
         }
       );
     } else {
-      User.collection.update(id, { $set: data }, (error) => {
-        if (error) {
-          swal("Error", error.message, "error");
-        } else {
-          swal("Success", "User Profile Updated", "success");
-          this.setState({ redirectToReferer: true });
+      User.collection.update(
+        id,
+        { $set: { ...data, imgType: type ? type : data.imgType } },
+        (error) => {
+          if (error) {
+            swal("Error", error.message, "error");
+          } else {
+            swal("Success", "User Profile Updated", "success");
+            this.setState({ redirectToReferer: true });
+          }
         }
-      });
+      );
     }
   }
   // On successful submit, insert the data.
@@ -203,6 +222,7 @@ class EditUserProfile extends React.Component {
                 />
               </Form.Group>
 
+              <UploadImg id={this.props.documentId} ref={this.imgType} />
               <SubmitField value="Submit" style={{ width: "100%" }} />
               <ErrorsField />
               <HiddenField name="owner" />
