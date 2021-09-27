@@ -69,7 +69,7 @@ class App extends React.Component {
           {this.props.userId !== null && <RightMenu />}
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     );
   }

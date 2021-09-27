@@ -7,9 +7,14 @@ import Users from "../components/Users";
 import { User } from "../../api/user/User";
 import { Redirect } from "react-router-dom";
 import AnimationWraper from "../components/AnimationWraper";
+import { Roles } from "meteor/alanning:roles";
+import Scanner from "../components/Scanner";
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return this.props.ready && this.props.users?.length === 0 ? (
       <Redirect to={{ pathname: "/editUserProfile/new" }} />
@@ -23,6 +28,7 @@ class UserProfile extends React.Component {
             <Users key={index} user={user} />
           ))}
         </div>
+        <Scanner />
       </AnimationWraper>
     );
   }
@@ -35,9 +41,12 @@ UserProfile.propTypes = {
 };
 
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(User.userPublicationName);
+  const subscription = Roles.userIsInRole(Meteor.userId(), "admin")
+    ? Meteor.subscribe(User.adminPublicationName)
+    : Meteor.subscribe(User.userPublicationName);
   const ready = subscription.ready();
-  const users = User.collection.find({}).fetch();
+  const users = User.collection.find().fetch();
+  console.log(users, Meteor.user());
   return {
     users,
     ready,
