@@ -10,7 +10,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Header, Menu } from 'semantic-ui-react';
 import MainHeader from '../components/MainHeader';
 import Footer from '../components/Footer';
 import Landing from '../pages/Home';
@@ -23,6 +22,7 @@ import PreLanding from '../pages/Landing';
 import UserProfile from '../pages/UserProfile';
 import VaccineRecord from '../pages/VaccineRecord';
 import EditUserProfile from '../pages/EditUserProfile';
+import EditVaccineRecord from '../pages/EditVaccineRecord';
 import LeftMenu from '../components/LeftMenu';
 import RightMenu from '../components/RightMenu';
 
@@ -59,11 +59,15 @@ class App extends React.Component {
             <Route path="/signout" component={Signout} />
             <Route exact path="/home" component={Landing} />
             <ProtectedRoute path="/dailyCheckUp" component={DailyCheckUp} />
-            <ProtectedRoute path="/userprofile" component={UserProfile} />
-            <ProtectedRoute path="/vaccinerecord" component={VaccineRecord} />
+            <ProtectedRoute path="/userProfile" component={UserProfile} />
+            <ProtectedRoute path="/vaccineRecord" component={VaccineRecord} />
             <ProtectedRoute
               path="/editUserProfile/:_id"
               component={EditUserProfile}
+            />
+            <ProtectedRoute
+              path="/editVaccineRecord/:_id"
+              component={EditVaccineRecord}
             />
             {/* <AdminProtectedRoute path="/admin" component={ListStuffAdmin} /> */}
             <Route component={NotFound} />

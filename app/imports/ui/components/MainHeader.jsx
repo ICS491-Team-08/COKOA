@@ -83,7 +83,7 @@ class MainHeader extends React.Component {
                   text="My Profile"
                   as={NavLink}
                   exact
-                  to="/userprofile"
+                  to="/userProfile"
                 />
                 <Dropdown.Item
                   id="navbar-vaccine-record"
@@ -91,7 +91,7 @@ class MainHeader extends React.Component {
                   text="My Vaccine Record"
                   as={NavLink}
                   exact
-                  to="/vaccinerecord"
+                  to="/vaccineRecord"
                 />
                 <Dropdown.Item
                   id="navbar-sign-out"

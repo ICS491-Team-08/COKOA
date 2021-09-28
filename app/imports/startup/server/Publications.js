@@ -28,13 +28,7 @@ Meteor.publish(Status.userPublicationName, function () {
   }
   return this.ready();
 });
-Meteor.publish(Status.vaccinePublicationName, function () {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Status.collection.find({ owner: username });
-  }
-  return this.ready();
-});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -61,7 +55,7 @@ Meteor.publish(User.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Vaccine.vaccinePublicationName, function () {
+Meteor.publish(Vaccine.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Vaccine.collection.find({ owner: username });

@@ -43,7 +43,7 @@ class VaccineRec extends React.Component {
 
   render() {
     return (
-      <Grid centered={true} className="users-container">
+      <Grid centered={true} className="vaccine-container">
         <Grid.Column style={{ display: 'flex', flexDirection: 'column' }}>
 
           <Table>
@@ -114,7 +114,7 @@ class VaccineRec extends React.Component {
             to={`/editVaccineRecord/${this.props.user._id}`}
             style={{ marginTop: '1rem' }}
           >
-            Edit Profile
+            Edit Vaccine Record
           </Button>
         </Grid.Column>
       </Grid>

@@ -65,13 +65,13 @@ class VaccineCollection {
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
-    this.vaccinePublicationName = `${this.name}.publication.user`;
+    this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
 
 /**
- * The singleton instance of the UserCollection.
- * @type {UserCollection}
+ * The singleton instance of the VaccineCollection.
+ * @type {VaccineCollection}
  */
 export const Vaccine = new VaccineCollection();

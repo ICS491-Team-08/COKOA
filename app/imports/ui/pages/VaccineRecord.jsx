@@ -1,18 +1,18 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Loader } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import Users from '../components/Users';
-import { User } from '../../api/user/User';
+import { Vaccine } from '../../api/vaccine/Vaccine';
 import AnimationWraper from '../components/AnimationWraper';
+import VaccineRec from '../components/VaccineRec';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class VaccineRecord extends React.Component {
   render() {
     return this.props.ready && this.props.users?.length === 0 ? (
-      <Redirect to={{ pathname: '/editVaccineRecord/new' }} />
+      <Redirect to={{ pathname: 'vaccineRecord' }} />
     ) : (
       <AnimationWraper visible={this.props.ready}>
         <div className="flex-column">
@@ -20,7 +20,7 @@ class VaccineRecord extends React.Component {
             My Vaccine Record
           </Header>
           {this.props.users.map((user, index) => (
-            <Users key={index} user={user} />
+            <VaccineRec key={index} user={user} />
           ))}
         </div>
       </AnimationWraper>
@@ -35,9 +35,9 @@ VaccineRecord.propTypes = {
 };
 
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(User.userPublicationName);
+  const subscription = Meteor.subscribe(Vaccine.userPublicationName);
   const ready = subscription.ready();
-  const users = User.collection.find({}).fetch();
+  const users = Vaccine.collection.find({}).fetch();
   return {
     users,
     ready,

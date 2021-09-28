@@ -22,13 +22,13 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { User } from '../../api/user/User';
+import { Vaccine } from '../../api/vaccine/Vaccine';
 import UploadImg from '../components/UploadImg';
 
-const bridge = new SimpleSchema2Bridge(User.schema);
+const bridge = new SimpleSchema2Bridge(Vaccine.schema);
 
 /** Renders the Page for editing a single document. */
-class EditUserProfile extends React.Component {
+class EditVaccineRecord extends React.Component {
   constructor(props) {
     super(props);
     this.state = { redirectToReferer: false, firstVaccineType: '' };
@@ -41,7 +41,7 @@ class EditUserProfile extends React.Component {
   userUpdate({ id, data }) {
     const type = this.imgType.current.imgTypeRef.current;
     if (id === 'new') {
-      User.collection.insert(
+      Vaccine.collection.insert(
         {
           ...data,
           owner: Meteor.user().username,
@@ -57,14 +57,14 @@ class EditUserProfile extends React.Component {
         },
       );
     } else {
-      User.collection.update(
+      Vaccine.collection.update(
         id,
         { $set: { ...data, imgType: type || data.imgType } },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            swal('Success', 'User Profile Updated', 'success');
+            swal('Success', 'Vaccine Record Updated', 'success');
             this.setState({ redirectToReferer: true });
           }
         },
@@ -130,14 +130,14 @@ class EditUserProfile extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     const { from } = this.props.location.state || {
-      from: { pathname: '/editUserProfile' },
+      from: { pathname: '/editVaccineRecord' },
     };
     // if correct authentication, redirect to page instead of login screen
     if (this.state.redirectToReferer) {
       return <Redirect to={from} />;
     }
     return (
-      <Grid centered className="edit-profile-container">
+      <Grid centered className="edit-vaccine-container">
         <Grid.Column>
           <Header as="h2" textAlign="center">
             Edit Profile
@@ -236,7 +236,7 @@ class EditUserProfile extends React.Component {
 }
 
 // Require the presence of a Stuff document in the props object. Uniforms adds 'model' to the props, which we use.
-EditUserProfile.propTypes = {
+EditVaccineRecord.propTypes = {
   doc: PropTypes.object,
   model: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -249,14 +249,14 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(User.userPublicationName);
+  const subscription = Meteor.subscribe(Vaccine.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the document
-  const doc = User.collection.findOne(documentId);
+  const doc = Vaccine.collection.findOne(documentId);
   return {
     doc,
     ready,
     documentId,
   };
-})(EditUserProfile);
+})(EditVaccineRecord);

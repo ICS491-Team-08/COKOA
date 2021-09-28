@@ -55,7 +55,7 @@ const Left = ({ activeItem, handleItemClick }) => (
             onClick={handleItemClick}
             as={NavLink}
             exact
-            to="/userprofile"
+            to="/userProfile"
           />
           <Menu.Item
             name="Vaccine Record"
@@ -63,7 +63,7 @@ const Left = ({ activeItem, handleItemClick }) => (
             onClick={handleItemClick}
             as={NavLink}
             exact
-            to="/vaccinerecord"
+            to="/vaccineRecord"
           />
           {/* <Menu.Item
               name="Personal Record"
