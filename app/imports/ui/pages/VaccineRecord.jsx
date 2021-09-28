@@ -4,9 +4,9 @@ import { Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Vaccine } from '../../api/vaccine/Vaccine';
+import { User } from '../../api/user/User';
 import AnimationWraper from '../components/AnimationWraper';
-import VaccineRec from '../components/VaccineRec';
+import Vaccine from '../components/Vaccine';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class VaccineRecord extends React.Component {
@@ -20,7 +20,7 @@ class VaccineRecord extends React.Component {
             My Vaccine Record
           </Header>
           {this.props.users.map((user, index) => (
-            <VaccineRec key={index} user={user} />
+            <Vaccine key={index} user={user} />
           ))}
         </div>
       </AnimationWraper>
@@ -35,9 +35,9 @@ VaccineRecord.propTypes = {
 };
 
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(Vaccine.userPublicationName);
+  const subscription = Meteor.subscribe(User.userPublicationName);
   const ready = subscription.ready();
-  const users = Vaccine.collection.find({}).fetch();
+  const users = User.collection.find({}).fetch();
   return {
     users,
     ready,

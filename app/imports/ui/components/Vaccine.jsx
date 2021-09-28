@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 
 /** Renders a card for a user profile. See pages/EditUserProfile.jsx. */
-class VaccineRec extends React.Component {
+class Vaccine extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -105,7 +105,7 @@ class VaccineRec extends React.Component {
           <Segment>
             <Grid.Row>
               <Grid.Column>
-                <Image src={this.state.img} size="small" centered={true} />
+                <Image src={this.state.img} size="medium" centered={true} />
               </Grid.Column>
             </Grid.Row>
           </Segment>
@@ -122,7 +122,7 @@ class VaccineRec extends React.Component {
   }
 }
 
-VaccineRec.propTypes = {
+Vaccine.propTypes = {
   user: PropTypes.shape({
     firstVaccineType: PropTypes.string,
     firstVaccineLot: PropTypes.number,
@@ -138,4 +138,4 @@ VaccineRec.propTypes = {
   }).isRequired,
 };
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default withRouter(VaccineRec);
+export default withRouter(Vaccine);

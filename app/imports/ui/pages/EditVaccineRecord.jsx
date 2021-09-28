@@ -22,10 +22,10 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { Vaccine } from '../../api/vaccine/Vaccine';
+import { User } from '../../api/user/User';
 import UploadImg from '../components/UploadImg';
 
-const bridge = new SimpleSchema2Bridge(Vaccine.schema);
+const bridge = new SimpleSchema2Bridge(User.schema);
 
 /** Renders the Page for editing a single document. */
 class EditVaccineRecord extends React.Component {
@@ -41,7 +41,7 @@ class EditVaccineRecord extends React.Component {
   userUpdate({ id, data }) {
     const type = this.imgType.current.imgTypeRef.current;
     if (id === 'new') {
-      Vaccine.collection.insert(
+      User.collection.insert(
         {
           ...data,
           owner: Meteor.user().username,
@@ -57,7 +57,7 @@ class EditVaccineRecord extends React.Component {
         },
       );
     } else {
-      Vaccine.collection.update(
+      User.collection.update(
         id,
         { $set: { ...data, imgType: type || data.imgType } },
         (error) => {
@@ -140,7 +140,7 @@ class EditVaccineRecord extends React.Component {
       <Grid centered className="edit-vaccine-container">
         <Grid.Column>
           <Header as="h2" textAlign="center">
-            Edit Profile
+            Edit Vaccine Record
           </Header>
           <AutoForm
             schema={bridge}
@@ -149,10 +149,6 @@ class EditVaccineRecord extends React.Component {
             modelTransform={this.modelTransform}
           >
             <Segment>
-              <TextField name="vaccineCard" />
-              <TextField name="firstName" />
-              <TextField name="lastName" />
-
               <Header
                 as="h3"
                 style={{ textAlign: 'center', padding: '1rem 0rem' }}
@@ -222,7 +218,12 @@ class EditVaccineRecord extends React.Component {
                   disabled={this.disableSecondField()}
                 />
               </Form.Group>
-
+              <Header
+                as="h3"
+                style={{ textAlign: 'center', padding: '1rem 0rem' }}
+              >
+                Vaccine Record Card
+              </Header>
               <UploadImg id={this.props.documentId} ref={this.imgType} />
               <SubmitField value="Submit" style={{ width: '100%' }} />
               <ErrorsField />
@@ -249,11 +250,11 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(Vaccine.userPublicationName);
+  const subscription = Meteor.subscribe(User.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the document
-  const doc = Vaccine.collection.findOne(documentId);
+  const doc = User.collection.findOne(documentId);
   return {
     doc,
     ready,
