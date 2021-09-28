@@ -1,12 +1,11 @@
-import { Menu } from "semantic-ui-react";
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { Menu } from 'semantic-ui-react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const Left = ({ activeItem, handleItemClick }) => {
-  return (
-    <div className="left-nav-menu">
-      <Menu vertical>
-        {/* <Menu.Item>
+const Left = ({ activeItem, handleItemClick }) => (
+  <div className="left-nav-menu">
+    <Menu vertical>
+      {/* <Menu.Item>
           <Menu.Header>Home</Menu.Header>
 
           <Menu.Menu>
@@ -26,39 +25,47 @@ const Left = ({ activeItem, handleItemClick }) => {
           </Menu.Menu>
         </Menu.Item> */}
 
-        <Menu.Item>
-          <Menu.Header>Health Status</Menu.Header>
+      <Menu.Item>
+        <Menu.Header>Health Status</Menu.Header>
 
-          <Menu.Menu>
-            <Menu.Item
-              name="Daily Check Up"
-              active={activeItem === "Daily Check Up"}
-              onClick={handleItemClick}
-              as={NavLink}
-              exact
-              to="/dailyCheckUP"
-            />
-            {/* <Menu.Item
+        <Menu.Menu>
+          <Menu.Item
+            name="Daily Check Up"
+            active={activeItem === 'Daily Check Up'}
+            onClick={handleItemClick}
+            as={NavLink}
+            exact
+            to="/dailyCheckUP"
+          />
+          {/* <Menu.Item
               name="History"
               active={activeItem === "History"}
               onClick={handleItemClick}
             /> */}
-          </Menu.Menu>
-        </Menu.Item>
+        </Menu.Menu>
+      </Menu.Item>
 
-        <Menu.Item>
-          <Menu.Header>My Information</Menu.Header>
+      <Menu.Item>
+        <Menu.Header>My Information</Menu.Header>
 
-          <Menu.Menu>
-            <Menu.Item
-              name="Profile"
-              active={activeItem === "Profile"}
-              onClick={handleItemClick}
-              as={NavLink}
-              exact
-              to="/userprofile"
-            />
-            {/* <Menu.Item
+        <Menu.Menu>
+          <Menu.Item
+            name="Profile"
+            active={activeItem === 'Profile'}
+            onClick={handleItemClick}
+            as={NavLink}
+            exact
+            to="/userprofile"
+          />
+          <Menu.Item
+            name="Vaccine Record"
+            active={activeItem === 'Vaccine'}
+            onClick={handleItemClick}
+            as={NavLink}
+            exact
+            to="/vaccinerecord"
+          />
+          {/* <Menu.Item
               name="Personal Record"
               active={activeItem === "Personal Record"}
               onClick={handleItemClick}
@@ -66,10 +73,10 @@ const Left = ({ activeItem, handleItemClick }) => {
               exact
               to="/edit/:_id"
             /> */}
-          </Menu.Menu>
-        </Menu.Item>
+        </Menu.Menu>
+      </Menu.Item>
 
-        {/* <Menu.Item>
+      {/* <Menu.Item>
           <Menu.Header>Support</Menu.Header>
 
           <Menu.Menu>
@@ -90,9 +97,8 @@ const Left = ({ activeItem, handleItemClick }) => {
             </Menu.Item>
           </Menu.Menu>
         </Menu.Item> */}
-      </Menu>
-    </div>
-  );
-};
+    </Menu>
+  </div>
+);
 
 export default Left;

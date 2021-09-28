@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header } from 'semantic-ui-react';
+import { Header, Loader } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -9,15 +9,15 @@ import { User } from '../../api/user/User';
 import AnimationWraper from '../components/AnimationWraper';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class UserProfile extends React.Component {
+class VaccineRecord extends React.Component {
   render() {
     return this.props.ready && this.props.users?.length === 0 ? (
-      <Redirect to={{ pathname: '/editUserProfile/new' }} />
+      <Redirect to={{ pathname: '/editVaccineRecord/new' }} />
     ) : (
       <AnimationWraper visible={this.props.ready}>
         <div className="flex-column">
           <Header as="h2" style={{ textAlign: 'center' }}>
-            My Profile
+            My Vaccine Record
           </Header>
           {this.props.users.map((user, index) => (
             <Users key={index} user={user} />
@@ -29,7 +29,7 @@ class UserProfile extends React.Component {
 }
 
 // Require an array of Stuff documents in the props.
-UserProfile.propTypes = {
+VaccineRecord.propTypes = {
   users: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -42,4 +42,4 @@ export default withTracker(() => {
     users,
     ready,
   };
-})(UserProfile);
+})(VaccineRecord);

@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   Image,
   Divider,
   Dropdown,
-  Icon,
   Segment,
   Sidebar,
   Grid,
   Button,
-} from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+} from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 
 class MainHeader extends React.Component {
   constructor(props) {
@@ -23,16 +22,15 @@ class MainHeader extends React.Component {
     this.activeMenu = this.activeMenu.bind(this);
     this.mainHeader = this.mainHeader.bind(this);
   }
+
   activeMenu() {
-    this.setState((prev) => {
-      return { activeMenuNav: !prev.activeMenuNav };
-    });
+    this.setState((prev) => ({ activeMenuNav: !prev.activeMenuNav }));
   }
+
   activeMain() {
-    this.setState((prev) => {
-      return { activeMainNav: !prev.activeMainNav };
-    });
+    this.setState((prev) => ({ activeMainNav: !prev.activeMainNav }));
   }
+
   mainHeader({ visible }) {
     return (
       <Sidebar
@@ -46,8 +44,8 @@ class MainHeader extends React.Component {
         <div
           className="main-header"
           style={{
-            display: !this.state.active ? "flex" : "none",
-            overflow: "visible",
+            display: !this.state.active ? 'flex' : 'none',
+            overflow: 'visible',
           }}
         >
           <div className="header-right flex-row">
@@ -64,7 +62,7 @@ class MainHeader extends React.Component {
               as={NavLink}
               exact
               to="/home"
-              style={{ width: "9rem" }}
+              style={{ width: '9rem' }}
             />
             {/* <Header as="h1" className="header-right-name">
               COKOA
@@ -76,7 +74,7 @@ class MainHeader extends React.Component {
               id="navbar-current-user"
               text={this.props.currentUser}
               pointing="top right"
-              icon={"big user"}
+              icon={'big user'}
             >
               <Dropdown.Menu>
                 <Dropdown.Item
@@ -86,6 +84,14 @@ class MainHeader extends React.Component {
                   as={NavLink}
                   exact
                   to="/userprofile"
+                />
+                <Dropdown.Item
+                  id="navbar-vaccine-record"
+                  icon="plus square"
+                  text="My Vaccine Record"
+                  as={NavLink}
+                  exact
+                  to="/vaccinerecord"
                 />
                 <Dropdown.Item
                   id="navbar-sign-out"
@@ -117,7 +123,7 @@ class MainHeader extends React.Component {
             <Grid.Column className="flex-column">
               <Button
                 icon="huge home"
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: 'white' }}
                 as={NavLink}
                 to="/home"
                 onClick={this.activeMenu}
@@ -127,7 +133,7 @@ class MainHeader extends React.Component {
             <Grid.Column className="flex-column">
               <Button
                 icon="huge check circle outline"
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: 'white' }}
                 as={NavLink}
                 to="/dailyCheckUp"
                 onClick={this.activeMenu}
@@ -137,7 +143,7 @@ class MainHeader extends React.Component {
             <Grid.Column className="flex-column">
               <Button
                 icon="huge address card outline"
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: 'white' }}
                 as={NavLink}
                 to="/userprofile"
                 onClick={this.activeMenu}
@@ -155,7 +161,7 @@ class MainHeader extends React.Component {
       <div className="white-bg sticky">
         <this.mainHeader visible={this.state.activeMainNav} />
         <this.HorizontalSidebar visible={this.state.activeMenuNav} />
-        <Divider style={{ margin: "unset" }} />
+        <Divider style={{ margin: 'unset' }} />
       </div>
     );
   }
