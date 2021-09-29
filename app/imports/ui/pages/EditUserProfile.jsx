@@ -130,7 +130,7 @@ class EditUserProfile extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     const { from } = this.props.location.state || {
-      from: { pathname: '/editUserProfile' },
+      from: { pathname: '/userProfile' },
     };
     // if correct authentication, redirect to page instead of login screen
     if (this.state.redirectToReferer) {
@@ -149,7 +149,6 @@ class EditUserProfile extends React.Component {
             modelTransform={this.modelTransform}
           >
             <Segment>
-              <TextField name="vaccineCard" />
               <TextField name="firstName" />
               <TextField name="lastName" />
 
