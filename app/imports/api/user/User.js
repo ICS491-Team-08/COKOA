@@ -25,7 +25,7 @@ class UserCollection {
           optional: true,
         },
         firstDate: {
-          type: "String",
+          type: Date,
           optional: true,
         },
         firstSite: {
@@ -57,6 +57,10 @@ class UserCollection {
           type: "String",
           optional: true,
         },
+        imgType:{
+          type: "String",
+          optional: true,
+        }
       },
       { tracker: Tracker }
     );

@@ -22,10 +22,8 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Header, Menu } from "semantic-ui-react";
 import UserProfile from "../pages/UserProfile";
 import EditUserProfile from "../pages/EditUserProfile";
-import LeftMenu from "../components/LeftMenu"
-import RightMenu from "../components/RightMenu"
-
-
+import LeftMenu from "../components/LeftMenu";
+import RightMenu from "../components/RightMenu";
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -45,35 +43,33 @@ class App extends React.Component {
     const { activeItem } = this.state;
     return (
       <Router>
-        <div>
-          {this.props.userId !== null && <MainHeader />}
-          <div className="landing-body">
-            {this.props.userId !== null && (
-              <LeftMenu
-                activeItem={activeItem}
-                handleItemClick={this.handleItemClick}
-              />
-            )}
-            <Switch>
-              <Route exact path="/" component={PreLanding} />
-              <Route path="/signin" component={Signin} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/signout" component={Signout} />
-              <Route exact path="/home" component={Landing} />
-              <ProtectedRoute path="/dailyCheckUp" component={DailyCheckUp} />
-              <ProtectedRoute path="/userprofile" component={UserProfile} />
-              <ProtectedRoute
-                path="/editUserProfile/:_id"
-                component={EditUserProfile}
-              />
-              {/* <AdminProtectedRoute path="/admin" component={ListStuffAdmin} /> */}
-              <Route component={NotFound} />
-            </Switch>
-            {this.props.userId !== null && <RightMenu />}
-          </div>
-
-          <Footer />
+        {this.props.userId !== null && <MainHeader />}
+        <div className="landing-body">
+          {this.props.userId !== null && (
+            <LeftMenu
+              activeItem={activeItem}
+              handleItemClick={this.handleItemClick}
+            />
+          )}
+          <Switch>
+            <Route exact path="/" component={PreLanding} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/signout" component={Signout} />
+            <Route exact path="/home" component={Landing} />
+            <ProtectedRoute path="/dailyCheckUp" component={DailyCheckUp} />
+            <ProtectedRoute path="/userprofile" component={UserProfile} />
+            <ProtectedRoute
+              path="/editUserProfile/:_id"
+              component={EditUserProfile}
+            />
+            {/* <AdminProtectedRoute path="/admin" component={ListStuffAdmin} /> */}
+            <Route component={NotFound} />
+          </Switch>
+          {this.props.userId !== null && <RightMenu />}
         </div>
+
+        <Footer />
       </Router>
     );
   }
