@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Grid, Segment, Button, Table, Image } from 'semantic-ui-react';
+import { Header, Grid, Button, Table, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 
@@ -102,13 +102,19 @@ class Vaccine extends React.Component {
             </Table.Body>
           </Table>
 
-          <Segment>
-            <Grid.Row>
-              <Grid.Column>
-                <Image src={this.state.img} size="medium" centered={true} />
-              </Grid.Column>
-            </Grid.Row>
-          </Segment>
+          <Table>
+            <Table.Header>
+              <Table.Row textAlign="center">
+                <Table.HeaderCell colSpan="2">
+                  Vaccine Record Card
+                </Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Image src={this.state.img} size="large" centered={true} />
+            </Table.Body>
+          </Table>
+
           <Button
             as={NavLink}
             to={`/editVaccineRecord/${this.props.user._id}`}

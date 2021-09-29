@@ -130,7 +130,7 @@ class EditVaccineRecord extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   renderPage() {
     const { from } = this.props.location.state || {
-      from: { pathname: '/editVaccineRecord' },
+      from: { pathname: '/vaccineRecord' },
     };
     // if correct authentication, redirect to page instead of login screen
     if (this.state.redirectToReferer) {
@@ -175,7 +175,6 @@ class EditVaccineRecord extends React.Component {
                   disabled={this.disableFirstField()}
                   max={new Date(2100, 1, 1)}
                   min={new Date(2000, 1, 1)}
-                  timeFormat="ampm"
                 />
                 <TextField
                   name="firstSite"
@@ -210,7 +209,6 @@ class EditVaccineRecord extends React.Component {
                   disabled={this.disableSecondField()}
                   max={new Date(2100, 1, 1)}
                   min={new Date(2000, 1, 1)}
-                  timeFormat="ampm"
                 />
                 <TextField
                   name="secondSite"

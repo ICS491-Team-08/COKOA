@@ -119,10 +119,10 @@ class MainHeader extends React.Component {
         onHidden={this.activeMain}
       >
         <Grid textAlign="center" className="horizontal-side-bar">
-          <Grid.Row columns={3}>
+          <Grid.Row columns={4}>
             <Grid.Column className="flex-column">
               <Button
-                icon="huge home"
+                icon="large home"
                 style={{ backgroundColor: 'white' }}
                 as={NavLink}
                 to="/home"
@@ -132,7 +132,7 @@ class MainHeader extends React.Component {
             </Grid.Column>
             <Grid.Column className="flex-column">
               <Button
-                icon="huge check circle outline"
+                icon="large check circle outline"
                 style={{ backgroundColor: 'white' }}
                 as={NavLink}
                 to="/dailyCheckUp"
@@ -142,13 +142,23 @@ class MainHeader extends React.Component {
             </Grid.Column>
             <Grid.Column className="flex-column">
               <Button
-                icon="huge address card outline"
+                icon="large address card outline"
                 style={{ backgroundColor: 'white' }}
                 as={NavLink}
-                to="/userprofile"
+                to="/userProfile"
                 onClick={this.activeMenu}
               ></Button>
               Profile
+            </Grid.Column>
+            <Grid.Column className="flex-column">
+              <Button
+                icon="large plus square"
+                style={{ backgroundColor: 'white' }}
+                as={NavLink}
+                to="/vaccineRecord"
+                onClick={this.activeMenu}
+              ></Button>
+              Vaccine
             </Grid.Column>
           </Grid.Row>
         </Grid>
