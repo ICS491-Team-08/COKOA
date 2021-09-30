@@ -12,7 +12,7 @@ import AnimationWraper from '../components/AnimationWraper';
 class UserProfile extends React.Component {
   render() {
     return this.props.ready && this.props.users?.length === 0 ? (
-      <Redirect to={{ pathname: 'userProfile' }} />
+      <Redirect to={{ pathname: '/eidtUserProfile/new' }} />
     ) : (
       <AnimationWraper visible={this.props.ready}>
         <div className="flex-column">
