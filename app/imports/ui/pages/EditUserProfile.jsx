@@ -32,43 +32,34 @@ class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { redirectToReferer: false, birthDate: '' };
-    this.imgType = React.createRef('');
+    //this.imgType = React.createRef('');
     //this.modelTransform = this.modelTransform.bind(this);
     //this.disableFirstField = this.disableFirstField.bind(this);
     //this.disableSecondField = this.disableSecondField.bind(this);
   }
 
   userUpdate({ id, data }) {
-    const type = this.imgType.current.imgTypeRef.current;
-    if (id === 'new') {
+    if (id === "new") {
       User.collection.insert(
-        {
-          ...data,
-          owner: Meteor.user().username,
-          imgType: type || data.imgType,
-        },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            swal('Success', 'User Profile Added Successfully', 'success');
-            this.setState({ redirectToReferer: true });
+          { ...data, owner: Meteor.user().username },
+          (error) => {
+            if (error) {
+              swal("Error", error.message, "error");
+            } else {
+              swal("Success", "User Profile Added Successfully", "success");
+              this.setState({ redirectToReferer: true });
+            }
           }
-        },
       );
     } else {
-      User.collection.update(
-        id,
-        { $set: { ...data, imgType: type || data.imgType } },
-        (error) => {
-          if (error) {
-            swal('Error', error.message, 'error');
-          } else {
-            swal('Success', 'User Profile Updated', 'success');
-            this.setState({ redirectToReferer: true });
-          }
-        },
-      );
+      User.collection.update(id, { $set: data }, (error) => {
+        if (error) {
+          swal("Error", error.message, "error");
+        } else {
+          swal("Success", "User Profile Updated", "success");
+          this.setState({ redirectToReferer: true });
+        }
+      });
     }
   }
 
@@ -126,11 +117,11 @@ class EditUserProfile extends React.Component {
                   //disabled={this.disableFirstField()}
                   max={new Date(2021, 1, 1)}
                   min={new Date(1900, 1, 1)}
-                  //timeFormat="ampm"
+                  timeFormat="ampm"
+
                 />
               </Form.Group>
 
-              <UploadImg id={this.props.documentId} ref={this.imgType} />
               <SubmitField value="Submit" style={{ width: '100%' }} />
               <ErrorsField />
               <HiddenField name="owner" />
