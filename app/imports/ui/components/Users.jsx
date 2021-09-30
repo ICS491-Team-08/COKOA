@@ -12,24 +12,6 @@ class Users extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.user.imgType) {
-      fetch('https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/s3', {
-        method: 'POST',
-        body: JSON.stringify({
-          type: 'getUriForGet',
-          params: {
-            key: this.props.user._id + this.props.user.imgType,
-          },
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => this.setState({ img: res }));
-    } else {
-      this.setState({ img: this.props.user.vaccineCard });
-    }
-  }
-
   RowCell({ headerText, value }) {
     return value ? (
       <Table.Row>
@@ -61,72 +43,18 @@ class Users extends React.Component {
                 value={this.props.user.lastName}
               />
               <this.RowCell headerText="Email" value={this.props.user.owner} />
-            </Table.Body>
-          </Table>
-
-          <Table>
-            <Table.Header>
-              <Table.Row textAlign="center">
-                <Table.HeaderCell colSpan="2">
-                  1st Dose of COVID-19
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
               <this.RowCell
-                headerText="Vaccine Type"
-                value={this.props.user.firstVaccineType}
+                  headerText="Gender"
+                  value={this.props.user.gender}
               />
               <this.RowCell
-                headerText="Vaccine Lot"
-                value={this.props.user.firstVaccineLot}
-              />
-              <this.RowCell
-                headerText="Date"
-                value={this.props.user.firstDate?.toString()}
-              />
-              <this.RowCell
-                headerText="Healthcare or Clinic Site"
-                value={this.props.user.firstSite}
+                  headerText="Date of Birth"
+                  value={this.props.user.birthDate?.toString()}
               />
             </Table.Body>
           </Table>
 
-          <Table>
-            <Table.Header>
-              <Table.Row textAlign="center">
-                <Table.HeaderCell colSpan="2">
-                  2st Dose of COVID-19
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <this.RowCell
-                headerText="Vaccine Type"
-                value={this.props.user.secondVaccineType}
-              />
-              <this.RowCell
-                headerText="Vaccine Lot"
-                value={this.props.user.secondVaccineLot}
-              />
-              <this.RowCell
-                headerText="Date"
-                value={this.props.user.secondDate?.toString()}
-              />
-              <this.RowCell
-                headerText="Healthcare or Clinic Site"
-                value={this.props.user.secondSite}
-              />
-            </Table.Body>
-          </Table>
 
-          <Segment>
-            <Grid.Row>
-              <Grid.Column>
-                <Image src={this.state.img} size="small" centered={true} />
-              </Grid.Column>
-            </Grid.Row>
-          </Segment>
           <Button
             as={NavLink}
             to={`/editUserProfile/${this.props.user._id}`}
@@ -144,15 +72,8 @@ Users.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
-    firstVaccineType: PropTypes.string,
-    firstVaccineLot: PropTypes.number,
-    firstDate: PropTypes.string,
-    firstSite: PropTypes.string,
-    secondVaccineType: PropTypes.string,
-    secondVaccineLot: PropTypes.number,
-    secondDate: PropTypes.string,
-    secondSite: PropTypes.string,
-    vaccineCard: PropTypes.string,
+    gender: PropTypes.string,
+    birthDate: PropTypes.string,
     _id: PropTypes.string,
     owner: PropTypes.string,
   }).isRequired,
