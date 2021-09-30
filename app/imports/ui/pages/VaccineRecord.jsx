@@ -4,7 +4,7 @@ import { Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { User } from '../../api/user/User';
+import { Vac } from '../../api/vac/Vac';
 import AnimationWraper from '../components/AnimationWraper';
 import Vaccine from '../components/Vaccine';
 
@@ -35,9 +35,9 @@ VaccineRecord.propTypes = {
 };
 
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(User.userPublicationName);
+  const subscription = Meteor.subscribe(Vac.userPublicationName);
   const ready = subscription.ready();
-  const users = User.collection.find({}).fetch();
+  const users = Vac.collection.find({}).fetch();
   return {
     users,
     ready,

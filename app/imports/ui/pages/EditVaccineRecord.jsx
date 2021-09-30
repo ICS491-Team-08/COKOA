@@ -24,8 +24,9 @@ import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { User } from '../../api/user/User';
 import UploadImg from '../components/UploadImg';
+import { Vac } from '../../api/vac/Vac';
 
-const bridge = new SimpleSchema2Bridge(User.schema);
+const bridge = new SimpleSchema2Bridge(Vac.schema);
 
 /** Renders the Page for editing a single document. */
 class EditVaccineRecord extends React.Component {
@@ -41,7 +42,7 @@ class EditVaccineRecord extends React.Component {
   userUpdate({ id, data }) {
     const type = this.imgType.current.imgTypeRef.current;
     if (id === 'new') {
-      User.collection.insert(
+      Vac.collection.insert(
         {
           ...data,
           owner: Meteor.user().username,
@@ -57,7 +58,7 @@ class EditVaccineRecord extends React.Component {
         },
       );
     } else {
-      User.collection.update(
+      Vac.collection.update(
         id,
         { $set: { ...data, imgType: type || data.imgType } },
         (error) => {
@@ -248,11 +249,11 @@ export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const documentId = match.params._id;
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe(User.userPublicationName);
+  const subscription = Meteor.subscribe(Vac.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the document
-  const doc = User.collection.findOne(documentId);
+  const doc = Vac.collection.findOne(documentId);
   return {
     doc,
     ready,
