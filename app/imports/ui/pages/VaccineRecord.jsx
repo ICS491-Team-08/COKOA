@@ -12,7 +12,7 @@ import Vaccine from '../components/Vaccine';
 class VaccineRecord extends React.Component {
   render() {
     return this.props.ready && this.props.users?.length === 0 ? (
-      <Redirect to={{ pathname: 'vaccineRecord' }} />
+      <Redirect to={{ pathname: '/editVaccineRecord/new' }} />
     ) : (
       <AnimationWraper visible={this.props.ready}>
         <div className="flex-column">
