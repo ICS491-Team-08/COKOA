@@ -37,7 +37,7 @@ const TableExampleStriped = ({ doc }) => (
         <Table.HeaderCell>Date</Table.HeaderCell>
         <Table.HeaderCell>Location</Table.HeaderCell>
         <Table.HeaderCell>Mood</Table.HeaderCell>
-        <Table.HeaderCell>Sick</Table.HeaderCell>
+        <Table.HeaderCell>Symptoms</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
 
@@ -56,11 +56,7 @@ const TableExampleStriped = ({ doc }) => (
             />
           </Table.Cell>
           <Table.Cell>
-            <Checkbox
-              label="I feel sick today. I need to rest."
-              checked={el.sick}
-              disabled
-            />
+          <b>Fever:</b> {el.fever} <br /> <b>Cough:</b> {el.cough} <br /><b>Muscle Aches:</b> {el.muscle} <br /><b>Sore Throat:</b> {el.throat} <br /><b>Shortness of Breath:</b> {el.breath} <br /><b>Chill:</b> {el.chill} <br /><b>Headache:</b> {el.headache} <br /><b>Loss of Smell or Taste:</b> {el.headache}
           </Table.Cell>
         </Table.Row>
       ))}
@@ -75,17 +71,24 @@ class DailyCheckUp extends React.Component {
     this.state = {
       location: "home",
       mood: 5,
-      sick: false,
+      fever: "no",
+      cough: "no",
+      muscle: "no",
+      throat: "no",
+      breath: "no",
+      chill: "no",
+      headache: "no",
+      loss: "no",
     };
   }
   // On submit, insert the data.
   submit = () => {
     const date = new Date();
     const now = date.toLocaleString();
-    const { location, mood, sick } = this.state;
+    const { location, mood,fever, cough, muscle, throat, breath, chill, headache, loss } = this.state;
     const owner = Meteor.user().username;
     Status.collection.insert(
-      { date: now, location, mood, sick, owner },
+      { date: now, location, mood, fever, cough, muscle, throat, breath, chill, headache, loss, owner },
       (error) => {
         if (error) {
           swal("Error", error.message, "error");
@@ -104,6 +107,22 @@ class DailyCheckUp extends React.Component {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
 
   locationOnChange = (e) => this.setState({ location: e.target.value });
+
+  //temp = {};
+  handleChange1 = (e, { value }) => this.setState({ fever: value });
+  handleChange2 = (e, { value }) => this.setState({ cough: value });
+  handleChange3 = (e, { value }) => this.setState({ muscle: value });
+  handleChange4 = (e, { value }) => this.setState({ throat: value });
+  handleChange5 = (e, { value }) => this.setState({ breath: value });
+  handleChange6 = (e, { value }) => this.setState({ chill: value });
+  handleChange7 = (e, { value }) => this.setState({ headache: value });
+  handleChange8 = (e, { value }) => this.setState({ loss: value });
+
+
+
+  //this part of the code needs to be changed to go back and forth between yes and no
+
+
 
   render() {
     const date = new Date();
@@ -139,11 +158,159 @@ class DailyCheckUp extends React.Component {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <Checkbox
-                    label="I feel sick today. I need to rest."
-                    checked={this.state.sick}
-                    onChange={this.checkboxHandler}
-                  />
+                <label>Do you have a fever (temperature over 100.3°F) without having taken any fever
+                reducing medications?</label>
+                <div>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.fever === 'yes'}
+                onChange={this.handleChange1}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.fever === 'no'}
+                onChange={this.handleChange1}
+                />
+                </div>
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have a Cough?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.cough === 'yes'}
+                onChange={this.handleChange2}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.cough === 'no'}
+                onChange={this.handleChange2}
+                />
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have a Muscle Aches?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.muscle === 'yes'}
+                onChange={this.handleChange3}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.muscle === 'no'}
+                onChange={this.handleChange3}
+                />
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have a Sore Throat?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.throat === 'yes'}
+                onChange={this.handleChange4}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.throat === 'no'}
+                onChange={this.handleChange4}
+                />
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have a Shortness of Breath?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.breath === 'yes'}
+                onChange={this.handleChange5}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.breath === 'no'}
+                onChange={this.handleChange5}
+                />
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have Chills?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.chill === 'yes'}
+                onChange={this.handleChange6}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.chill === 'no'}
+                onChange={this.handleChange6}
+                />
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have a Headache?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.headache === 'yes'}
+                onChange={this.handleChange7}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.headache === 'no'}
+                onChange={this.handleChange7}
+                />
+                </Form.Field>
+                <Form.Field>
+                <label>Do you have a Loss of Smell or Taste?</label>
+                <Checkbox
+                radio
+                label='Yes'
+                name='checkboxRadioGroup'
+                value='yes'
+                checked={this.state.loss === 'yes'}
+                onChange={this.handleChange8}
+                />
+                <Checkbox
+                radio
+                label='No'
+                name='checkboxRadioGroup'
+                value='no'
+                checked={this.state.loss === 'no'}
+                onChange={this.handleChange8}
+                />
                 </Form.Field>
                 <Button type="submit" onClick={this.submit}>
                   Submit
