@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Grid, Segment, Button, Table, Image } from 'semantic-ui-react';
+import { Header, Grid, Button, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
 
@@ -44,16 +44,15 @@ class Users extends React.Component {
               />
               <this.RowCell headerText="Email" value={this.props.user.owner} />
               <this.RowCell
-                  headerText="Gender"
-                  value={this.props.user.gender}
+                headerText="Gender"
+                value={this.props.user.gender}
               />
               <this.RowCell
-                  headerText="Date of Birth"
-                  value={this.props.user.birthDate?.toString()}
+                headerText="Date of Birth"
+                value={this.props.user.birthDate?.toString()}
               />
             </Table.Body>
           </Table>
-
 
           <Button
             as={NavLink}

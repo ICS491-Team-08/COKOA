@@ -1,29 +1,14 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import {
-  Grid,
-  Loader,
-  Header,
-  Segment,
-  Select,
-  Form,
-} from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Select, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import {
-  AutoForm,
-  ErrorsField,
-  HiddenField,
-  SelectField,
-  SubmitField,
-  TextField,
-  DateField,
-} from 'uniforms-semantic';
+import { AutoForm, ErrorsField, HiddenField, SelectField, SubmitField, TextField, DateField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { User } from '../../api/user/User';
-import UploadImg from '../components/UploadImg';
+// import UploadImg from '../components/UploadImg';
 
 const bridge = new SimpleSchema2Bridge(User.schema);
 
@@ -32,31 +17,31 @@ class EditUserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { redirectToReferer: false, birthDate: '' };
-    //this.imgType = React.createRef('');
-    //this.modelTransform = this.modelTransform.bind(this);
-    //this.disableFirstField = this.disableFirstField.bind(this);
-    //this.disableSecondField = this.disableSecondField.bind(this);
+    // this.imgType = React.createRef('');
+    // this.modelTransform = this.modelTransform.bind(this);
+    // this.disableFirstField = this.disableFirstField.bind(this);
+    // this.disableSecondField = this.disableSecondField.bind(this);
   }
 
   userUpdate({ id, data }) {
-    if (id === "new") {
+    if (id === 'new') {
       User.collection.insert(
-          { ...data, owner: Meteor.user().username },
-          (error) => {
-            if (error) {
-              swal("Error", error.message, "error");
-            } else {
-              swal("Success", "User Profile Added Successfully", "success");
-              this.setState({ redirectToReferer: true });
-            }
+        { ...data, owner: Meteor.user().username },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'User Profile Added Successfully', 'success');
+            this.setState({ redirectToReferer: true });
           }
+        },
       );
     } else {
       User.collection.update(id, { $set: data }, (error) => {
         if (error) {
-          swal("Error", error.message, "error");
+          swal('Error', error.message, 'error');
         } else {
-          swal("Success", "User Profile Updated", "success");
+          swal('Success', 'User Profile Updated', 'success');
           this.setState({ redirectToReferer: true });
         }
       });
@@ -95,7 +80,7 @@ class EditUserProfile extends React.Component {
             schema={bridge}
             onSubmit={(data) => this.submit(data)}
             model={this.props.doc}
-           // modelTransform={this.modelTransform}
+            // modelTransform={this.modelTransform}
           >
             <Segment>
               <TextField name="firstName" />
@@ -114,7 +99,7 @@ class EditUserProfile extends React.Component {
                 <DateField
                   name="birthDate"
                   label="Date of Birth"
-                  //disabled={this.disableFirstField()}
+                  // disabled={this.disableFirstField()}
                   max={new Date(2021, 1, 1)}
                   min={new Date(1900, 1, 1)}
                   timeFormat="ampm"

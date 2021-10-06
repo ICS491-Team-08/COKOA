@@ -1,9 +1,10 @@
-import React from "react";
-import { Button, Divider, Image, Transition } from "semantic-ui-react";
+import React from 'react';
+import { Transition } from 'semantic-ui-react';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class AnimationWraper extends React.Component {
   componentDidMount() {}
+
   render() {
     console.log(this.props.visible);
     return (

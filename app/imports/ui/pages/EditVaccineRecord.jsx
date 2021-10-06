@@ -1,28 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import {
-  Grid,
-  Loader,
-  Header,
-  Segment,
-  Select,
-  Form,
-} from 'semantic-ui-react';
+import { Grid, Loader, Header, Segment, Select, Form } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import {
-  AutoForm,
-  ErrorsField,
-  HiddenField,
-  SelectField,
-  SubmitField,
-  TextField,
-  DateField,
-} from 'uniforms-semantic';
+import { AutoForm, ErrorsField, HiddenField, SelectField, SubmitField, TextField, DateField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { User } from '../../api/user/User';
 import UploadImg from '../components/UploadImg';
 import { Vac } from '../../api/vac/Vac';
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Segment,
   Grid,
@@ -7,30 +7,31 @@ import {
   Icon,
   Button,
   Image,
-} from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-import { Meteor } from "meteor/meteor";
-import { Redirect } from "react-router-dom";
-import { withTracker } from "meteor/react-meteor-data";
+} from 'semantic-ui-react';
+import { NavLink, Redirect } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+
+import { withTracker } from 'meteor/react-meteor-data';
 
 /** Render a Not Found page if the user enters a URL that doesn't match any route. */
 class PreLanding extends React.Component {
   componentDidMount() {
   }
+
   render() {
     return this.props.userId ? (
-      <Redirect to={{ pathname: "/home" }} />
+      <Redirect to={{ pathname: '/home' }} />
     ) : (
       <div className="prelanding">
         <Segment>
-          <div className="prelanding" style={{ margin: "2rem 0rem" }}>
+          <div className="prelanding" style={{ margin: '2rem 0rem' }}>
             <Image src="/images/cokoa.png" size="big" circular />
           </div>
-          <Header as="h1" style={{ textAlign: "center" }}>
+          <Header as="h1" style={{ textAlign: 'center' }}>
             Welcome to COKOA!
           </Header>
           <br />
-          <Segment placeholder style={{ border: "unset" }}>
+          <Segment placeholder style={{ border: 'unset' }}>
             <Grid columns={2} stackable textAlign="center">
               <Divider vertical className="or-divider">
                 Or
