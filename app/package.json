@@ -38,6 +38,6 @@
     "lint": "eslint --quiet --fix --ext .jsx --ext .js ./imports",
     "testcafe-development": "testcafe chrome tests/*.testcafe.js",
     "testcafe": "testcafe chrome:headless tests/*.testcafe.js -q --app \"meteor npm run start\"",
-    "deploy" : "meteor deploy team-8-cokoa.meteorapp.com --settings ../config/settings.production.json --free --mongo"
+    "deploy": "meteor deploy team-8-cokoa.meteorapp.com --settings ../config/settings.production.json --free --mongo"
   }
 }
