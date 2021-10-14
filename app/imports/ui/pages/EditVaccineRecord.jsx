@@ -40,7 +40,8 @@ class EditVaccineRecord extends React.Component {
   }
 
   userUpdate({ id, data }) {
-    const type = this.imgType.current.imgTypeRef.current;
+    const type = this.imgType.current;
+    console.log(this.imgType);
     if (id === 'new') {
       Vac.collection.insert(
         {
@@ -223,7 +224,7 @@ class EditVaccineRecord extends React.Component {
               >
                 Vaccine Record Card
               </Header>
-              <UploadImg id={this.props.documentId} ref={this.imgType} />
+              <UploadImg id={this.props.documentId} imgType={this.imgType} />
               <SubmitField value="Submit" style={{ width: '100%' }} />
               <ErrorsField />
               <HiddenField name="owner" />
