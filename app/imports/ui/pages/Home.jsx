@@ -8,11 +8,12 @@ import {
   Menu,
   Divider,
 } from 'semantic-ui-react';
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 import { User } from '../../api/user/User';
 import AnimationWraper from '../components/AnimationWraper';
-import UploadImg from '../components/UploadImg';
 
 const Body = () => (
   <Card.Group className="action-body">
@@ -25,11 +26,13 @@ const Body = () => (
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <div className="ui two buttons">
-          <Button basic color="green">
+        <Link to={'/editVaccineRecord/new'}>
+          <div className="ui two buttons">
+            <Button basic color="green">
             Add Vaccination Card
-          </Button>
-        </div>
+            </Button>
+          </div>
+        </Link>
       </Card.Content>
     </Card>
     <Card style={{ margin: '1rem', width: 'auto' }}>
@@ -46,6 +49,7 @@ const Body = () => (
               Submit a Test Result
           </Button>
         </div>
+
       </Card.Content>
     </Card>
   </Card.Group>
@@ -118,6 +122,7 @@ const Center = () => (
 class Landing extends React.Component {
   constructor(props) {
     super(props);
+    this.imgType = React.createRef('');
   }
 
   render() {
