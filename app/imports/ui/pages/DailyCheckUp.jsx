@@ -65,9 +65,7 @@ const TableExampleStriped = ({ doc }) => (
           <Table.Cell>
           <Accordion collapsible>
           <AccordionItem>
-        <h3>
           <AccordionButton>Click</AccordionButton>
-        </h3>
         <AccordionPanel>
           <b>Fever:</b> {el.fever} <br /> <b>Cough:</b> {el.cough} <br /><b>Muscle Aches:</b> {el.muscle} <br /><b>Sore Throat:</b> {el.throat} <br /><b>Shortness of Breath:</b> {el.breath} <br /><b>Chill:</b> {el.chill} <br /><b>Headache:</b> {el.headache} <br /><b>Loss of Smell or Taste:</b> {el.headache}
         </AccordionPanel>
