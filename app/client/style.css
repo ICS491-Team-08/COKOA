@@ -182,6 +182,7 @@
   .main-header-1 {
     z-index: 5;
     padding: unset !important;
+    background-color: black;
     /* overflow-y: visible !important; */
   }
   .checkup-container {

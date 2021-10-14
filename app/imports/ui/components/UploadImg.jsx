@@ -1,5 +1,4 @@
 import React, { createRef } from "react";
-import { Button, Divider, Image, Transition } from "semantic-ui-react";
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class UploadImg extends React.Component {
@@ -107,12 +106,16 @@ class UploadImg extends React.Component {
           style={{ display: "none" }}
           ref={this.inputRef}
         />
-        <a href="#" id="fileSelect">
+        <div style={{ textAlign: 'center'}} className="input-file-button">
+        <button class="ui large inverted orange button" style={{color: 'black'}} href="#" id="fileSelect">
           Upload Vaccination Record Card File.
-        </a>
-        <div id="fileList">
-          <p>No files selected!</p>
+        </button>
         </div>
+        <br/>
+        <div id="fileList">
+          <p style={{ textAlign: 'center'}}>No files selected!</p>
+        </div>
+        <br/>
       </>
     );
   }
