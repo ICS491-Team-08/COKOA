@@ -5,7 +5,7 @@ import {
   Container,
   Form,
   Grid,
-  Header,
+  Header, Image,
   Message,
   Segment,
 } from 'semantic-ui-react';
@@ -61,6 +61,9 @@ class Signup extends React.Component {
             </Header>
             <Form onSubmit={this.submit}>
               <Segment stacked>
+                <b className="logo-name">
+                  <Image
+                      src="/images/cokoa.png"/></b>
                 <Form.Input
                   label="Email"
                   id="signup-form-email"
