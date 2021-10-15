@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, Grid, Button, Table, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
 
 /** Renders a card for a user profile. See pages/EditUserProfile.jsx. */
 class Vaccine extends React.Component {
@@ -19,7 +20,7 @@ class Vaccine extends React.Component {
         body: JSON.stringify({
           type: 'getUriForGet',
           params: {
-            key: this.props.user._id + this.props.user.imgType,
+            key: Meteor.userId() + this.props.user.imgType,
           },
         }),
       })
