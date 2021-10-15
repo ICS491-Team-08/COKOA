@@ -1,5 +1,8 @@
 import React, { createRef } from "react";
 
+import { Meteor } from 'meteor/meteor';
+import { Button, Divider, Image, Transition } from "semantic-ui-react";
+
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class UploadImg extends React.Component {
   constructor(props) {
@@ -26,11 +29,11 @@ class UploadImg extends React.Component {
 
     fileElem.addEventListener(
       "change",
-      handleFiles.bind(fileElem, this.props.id, this.imgTypeRef),
+      handleFiles.bind(fileElem, Meteor.userId(), this.props.imgType),
       false
     );
 
-    function handleFiles(id, ref) {
+    async function handleFiles(id, ref) {
       if (!this.files.length) {
         fileList.innerHTML = "<p>No files selected!</p>";
       } else {
@@ -60,7 +63,7 @@ class UploadImg extends React.Component {
         });
         // console.log(this.files[0]);
         ref.current = type;
-        fetch(
+        await fetch(
           "https://uj0flxl0te.execute-api.us-east-1.amazonaws.com/prod/s3",
           {
             method: "POST",
