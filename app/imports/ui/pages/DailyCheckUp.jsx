@@ -9,6 +9,13 @@ import {
   Button,
   Checkbox,
 } from "semantic-ui-react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+} from "@reach/accordion";
+import "@reach/accordion/styles.css";
 import swal from "sweetalert";
 import { Meteor } from "meteor/meteor";
 import { withTracker } from "meteor/react-meteor-data";
@@ -56,7 +63,14 @@ const TableExampleStriped = ({ doc }) => (
             />
           </Table.Cell>
           <Table.Cell>
+          <Accordion collapsible>
+          <AccordionItem>
+          <AccordionButton>Click</AccordionButton>
+        <AccordionPanel>
           <b>Fever:</b> {el.fever} <br /> <b>Cough:</b> {el.cough} <br /><b>Muscle Aches:</b> {el.muscle} <br /><b>Sore Throat:</b> {el.throat} <br /><b>Shortness of Breath:</b> {el.breath} <br /><b>Chill:</b> {el.chill} <br /><b>Headache:</b> {el.headache} <br /><b>Loss of Smell or Taste:</b> {el.headache}
+        </AccordionPanel>
+      </AccordionItem>
+      </Accordion>
           </Table.Cell>
         </Table.Row>
       ))}
@@ -168,7 +182,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.fever === 'yes'}
                 onChange={this.handleChange1}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -188,7 +202,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.cough === 'yes'}
                 onChange={this.handleChange2}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -207,7 +221,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.muscle === 'yes'}
                 onChange={this.handleChange3}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -226,7 +240,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.throat === 'yes'}
                 onChange={this.handleChange4}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -245,7 +259,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.breath === 'yes'}
                 onChange={this.handleChange5}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -264,7 +278,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.chill === 'yes'}
                 onChange={this.handleChange6}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -283,7 +297,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.headache === 'yes'}
                 onChange={this.handleChange7}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
@@ -302,7 +316,7 @@ class DailyCheckUp extends React.Component {
                 value='yes'
                 checked={this.state.loss === 'yes'}
                 onChange={this.handleChange8}
-                />
+                /><br />
                 <Checkbox
                 radio
                 label='No'
